@@ -4,7 +4,7 @@
 }
 
 .App-logo {
-  height: 15vmin;
+  height: 7vmin;
   pointer-events: none;
   position: absolute;
   left: 1vh;
@@ -35,6 +35,25 @@
   color: #61dafb;
 }
 
+.buttons {
+  overflow: hidden;
+  left: 15vh;
+  top: 8vh;
+  color: #026917;
+  position: absolute;
+  font-family: "Courier New";
+}
+
+.buttons p {
+  float: left;
+  padding: 14px 20px;
+  text-align: center;
+}
+
+.buttons p:hover {
+  font-size: 120%;
+  transform: translateY(-12%);
+}
 
 /*@keyframes App-logo-spin {
   from {
