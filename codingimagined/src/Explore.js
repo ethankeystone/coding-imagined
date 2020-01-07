@@ -1,10 +1,14 @@
 import React from "react";
+import NavBar from "./NavBar";
 
 function Explore() {
     return ( 
         <div>
-            Explore
+        <NavBar></NavBar>
+        <div>
+            Explore Page
         </div>
+    </div>
 
     );
 }
