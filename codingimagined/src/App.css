@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-  position: relative;
-}
 
 .App-logo {
   height: 7vmin;
@@ -12,42 +8,18 @@
   opacity: 100%;
 }
 
-.App-header {
-  background-color: #ffffff;
-  /*min-height: 50vh;*/
-  max-height: 20vh;
-  outline: 1vh black;
-  outline-color: aquamarine;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 .buttons {
-  overflow: hidden;
-  left: 15vh;
-  top: 8vh;
   color: #026917;
-  position: absolute;
   font-family: "Courier New";
 }
 
-.buttons p {
-  float: left;
-  padding: 14px 20px;
-  text-align: center;
+li{
+  list-style: none;
 }
 
-.buttons p:hover {
-  font-size: 120%;
-  transform: translateY(-12%);
+.button {
+  color: #026917;
 }
 
 @media (prefers-reduced-motion: no-preference) {

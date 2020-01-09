@@ -1,39 +1,44 @@
 import React from "react";
 import logo from "./codinglogo.svg";
-import logo_two from "./codinglogo_two.svg";
+import logo_two from "./logo.svg";
 import {Link} from "react-router-dom";
+import "./NavBar.css";
 
 function NavBar() {
     return ( 
-        <div className="App">
-        <header className="App-header">
-        <img src={logo_two} className="App-logo" id="App-logo-two" alt="logo-two" />
-        <img src={logo} className="App-logo" id="App-logo" alt="logo" />
-        <div class="buttons">
-            <p className="Header-Button" tag="sample1">
-                <Link to="/explore" style={{ textDecoration: 'none'}}>
-                   Explore
-                </Link>
-            </p>
-            <p className="Header-Button" tag="sample2">
-                <Link to="/about" style={{ textDecoration: 'none'}}>
-                   About Us
-                </Link>
-            </p>
-            <p className="Header-Button" tag="sample3">
-                <Link to="/morestuff" style={{ textDecoration: 'none'}}>
-                   More Stuff
-                </Link>
-            </p>
-            <p className="Header-Button" tag="sample4">
-                <Link to="/evenMoreStuff" style={{ textDecoration: 'none'}}>
-                   Even More Stuff
-                </Link>
-            </p>
-        </div>
+        <header>
+            <div className = "container">
+            <img src={logo_two} className="App-logo" id="App-logo-two" alt="logo-two" />
+            <img src={logo} className="App-logo" id="App-logo" alt="logo" />
+            <h1>
+                Coding Imagined
+            </h1>
+            <nav className="App-Header">
+                <ul class="buttons">
+                    <li>
+                        <Link to="/explore" style={{ textDecoration: 'none'}} className = "button">
+                            Explore
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/about" style={{ textDecoration: 'none'}} className = "button">
+                        About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/morestuff" style={{ textDecoration: 'none'}} className = "button">
+                        More Stuff
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/evenMoreStuff" style={{ textDecoration: 'none'}} className = "button">
+                        Even More Stuff
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+            </div>
         </header>
-    </div>
-
     );
 }
 
