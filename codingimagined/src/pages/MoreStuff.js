@@ -1,16 +1,16 @@
 import React from "react";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 
-function EvenMoreStuff() {
+function MoreStuff() {
     return ( 
         <div>
         <NavBar></NavBar>
         <div>
-            Even More Stuff
+            More Stuff
         </div>
     </div>
 
     );
 }
 
-export default EvenMoreStuff;
+export default MoreStuff;

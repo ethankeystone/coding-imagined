@@ -1,5 +1,5 @@
 .App-logo {   
-
+  margin-bottom: 10x;
 }
 
 h1 {
@@ -25,6 +25,7 @@ h1 {
 
 header {
   background: whitesmoke;
+  padding-bottom: 10px;
 }
 
 header::after {
@@ -46,7 +47,7 @@ nav ul {
 nav li {
   display: inline-block;
   margin-left: 70px;
-  padding-top: 23px;
+  padding-top: 10px;
 
   position: relative;
 }

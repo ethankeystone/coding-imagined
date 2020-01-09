@@ -1,13 +1,12 @@
 import React from "react";
-import logo from "./codinglogo.svg";
-import "./App.css";
+import "./css/App.css";
 import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
-import Explore from "./Explore"
-import AboutUs from "./AboutUs"
-import MoreStuff from "./MoreStuff"
-import EvenMoreStuff from "./EvenMoreStuff"
-import Error from "./Error";
-import Home from "./Home";
+import Explore from "./pages/Explore"
+import AboutUs from "./pages/AboutUs"
+import MoreStuff from "./pages/MoreStuff"
+import EvenMoreStuff from "./pages/EvenMoreStuff"
+import Error from "./pages/Error";
+import Home from "./pages/Home";
 
 function App() {
   return (

@@ -1,17 +1,18 @@
 import React from "react";
-import logo from "./codinglogo.svg";
-import logo_two from "./logo.svg";
+import logo from "./images/codinglogo.svg";
+import logo_two from "./images/logo.svg";
 import {Link} from "react-router-dom";
-import "./NavBar.css";
+import "./css/NavBar.css";
 
 function NavBar() {
     return ( 
         <header>
             <div className = "container">
-            <img src={logo_two} className="App-logo" id="App-logo-two" alt="logo-two" />
             <img src={logo} className="App-logo" id="App-logo" alt="logo" />
             <h1>
-                Coding Imagined
+                <Link to="/" style={{ textDecoration: 'none'}} className = "button">
+                  Coding Imagined
+                </Link>
             </h1>
             <nav className="App-Header">
                 <ul class="buttons">
