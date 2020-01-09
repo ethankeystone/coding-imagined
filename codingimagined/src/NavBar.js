@@ -1,12 +1,14 @@
 import React from "react";
 import logo from "./codinglogo.svg";
+import logo_two from "./codinglogo_two.svg";
 import {Link} from "react-router-dom";
 
 function NavBar() {
     return ( 
         <div className="App">
         <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo_two} className="App-logo" id="App-logo-two" alt="logo-two" />
+        <img src={logo} className="App-logo" id="App-logo" alt="logo" />
         <div class="buttons">
             <p className="Header-Button" tag="sample1">
                 <Link to="/explore" style={{ textDecoration: 'none'}}>
