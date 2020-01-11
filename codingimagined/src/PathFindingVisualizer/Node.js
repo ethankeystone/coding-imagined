@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import "./Node.css"
 
-function Node() {
+export default class Node extends Component {
+  render() {
+    const {
+      col,
+      row
+    } = this.props;
+    const color = (col + row) % 2 == 0 ? "red" : "green";
     return (
-      <div className="node">
+      <div className={color} >
       </div>
     );
+  
   }
+}
+   
 
-  export default Node;

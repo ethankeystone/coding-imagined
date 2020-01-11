@@ -15,7 +15,7 @@ function NavBar() {
                 </Link>
             </h1>
             <nav className="App-Header">
-                <ul class="buttons">
+                <ul className="buttons">
                     <li>
                         <Link to="/explore" style={{ textDecoration: 'none'}} className = "button">
                             Explore
