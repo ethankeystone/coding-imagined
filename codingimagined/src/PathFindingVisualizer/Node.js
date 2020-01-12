@@ -9,7 +9,7 @@ export default class Node extends Component {
     } = this.props;
     const color = (col + row) % 2 == 0 ? "red" : "green";
     return (
-      <div className={color} >
+      <div className={color + " node"}>
       </div>
     );
   

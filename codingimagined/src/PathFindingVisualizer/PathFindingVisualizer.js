@@ -34,17 +34,17 @@ export default class PathFindingVisualizer extends Component {
             );
         } else {
             let grid = this.state.grid;
-            var recipe = ["food", "nice"];
             return (
-                <div>
+                <div className="center">
                    {grid.map(row => {
                         return (
-                            row.map(node => {
-                                console.log(node);
-                                return(
-                                    <Node col={node.col} row={node.row}></Node>
+                            <div> 
+                                {row.map(node => {
+                                    return(
+                                        <Node col={node.col} row={node.row}></Node>
                                 );
-                            })
+                            })}
+                            </div>
                         );
                     }
                    )}
