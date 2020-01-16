@@ -5,6 +5,11 @@
   display: inline-block;
 }
 
+.node:hover {
+  animation-name: hoverAnimation;
+  animation-duration: .1s;
+  animation-fill-mode: forwards;
+}
 .red {
   background-color: red;
 }
@@ -12,9 +17,24 @@
   background-color: blue;
 }
 
+.green:hover {
+  background-color: blue;
+}
+
 .green {
   background-color: green;
 }
+
 .blue {
   background-color: blue;
+}
+
+@keyframes hoverAnimation {
+  25% {background-color: #B6F2D4; transform: scale(.25);}
+  50% {background-color: #1AFF8D; transform: scale(.75);}
+  75% {background-color: #02B55B; transform: scale(1.2);}
+  100% {background-color: #026917; transform: scale(1);}
+}
+@keyframes expansionAnimation {
+
 }
