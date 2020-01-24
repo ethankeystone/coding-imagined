@@ -6,7 +6,6 @@ export default class Node extends Component {
   
   constructor(props) {
     super(props);
-    this.changeColor.bind(this)
     this.state = {
       isLoading: false,
       color: "none"
@@ -14,33 +13,51 @@ export default class Node extends Component {
   }
 
   componentDidMount() {
-    this.state = {
-      isLoading: false,
-      color: "none"
-    };
-  }
-  changeColor() {
-    var newColor = (this.state.color == "none") ? "green": "none";
     this.setState({
       isLoading: false,
-      color: newColor
+      color: "none",
+      col: this.props.col,
+      row: this.props.row
     });
+  }
+
+  determineColor(nodeState) {
+    if(nodeState === "none") {
+      return("none");
+    } else if (nodeState === "expand") {
+      return ("green");
+    } else if (nodeState === "path") {
+      return ("blue");
+    } else {
+      return("error");
+    }
   }
   render() {
     const {
       col,
-      row
+      row,
+      addNode,
+      state,
+      handleMouseUp,
+      handleMouseDown
     } = this.props;
-    const color = (col + row) % 2 == 0 ? "red" : "green";
-    if(this.state.isLoading == true) {
+    var color = this.determineColor(state)
+    this.state.color = color;
+    if(this.state.isLoading === true) {
       return (
         <div className={"node "}>
-          y
+          Yikes
         </div>
       );
     } else {
       return (
-        <div className={"node " + this.state.color} onMouseDown={() => {this.changeColor()}}>
+        <div className={"node " + this.state.color}
+           onMouseDown={() => {
+             handleMouseDown()
+          }}
+            onMouseEnter={() => addNode(col, row)}
+            onMouseUp={() => handleMouseUp()}
+          >
         </div>
       );
     }

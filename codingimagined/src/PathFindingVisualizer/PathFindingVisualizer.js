@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Node from "./Node";
+import update from 'immutability-helper';
 import "./PathFindingVisualizer.css";
 
 export default class PathFindingVisualizer extends Component {
@@ -7,7 +8,8 @@ export default class PathFindingVisualizer extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      grid: null
+      grid: null,
+      mouseDown: false
     };
   }
 
@@ -23,6 +25,7 @@ export default class PathFindingVisualizer extends Component {
           col: i,
           row: j,
           id: id,
+          state: "none"
         });
         id++;
       }
@@ -33,6 +36,22 @@ export default class PathFindingVisualizer extends Component {
       grid: grid
     });
   }
+
+  addNode(row, col) {
+    if(this.state.mouseDown) {
+      this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "expand"}}}})});
+    }
+  }
+
+  handleMouseDown() {
+    this.setState({mouseDown: true});
+  }
+
+  handleMouseUp() {
+    this.setState({mouseDown: false});
+  }
+
+
   render() {
     if (this.state.isLoading) {
       return <div></div>;
@@ -44,7 +63,16 @@ export default class PathFindingVisualizer extends Component {
             return (
               <div key={row[0].col} className="row">
                 {row.map(node => {
-                  return <Node col={node.col} row={node.row} key={node.id}></Node>;
+                  return <Node
+                    col={node.col} 
+                    row={node.row} 
+                    key={node.id}
+                    addNode={(row, col) => this.addNode(node.row, node.col)}
+                    handleMouseDown={() => this.handleMouseDown()}
+                    handleMouseUp={() => this.handleMouseUp()}
+                    state={node.state}  
+                    >
+                   </Node>;
                 })}
               </div>
             );

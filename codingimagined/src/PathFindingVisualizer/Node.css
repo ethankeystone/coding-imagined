@@ -3,11 +3,13 @@
   height: 25px;
   outline: 1px solid rgb(175, 216, 248);
   display: inline-block;
+  padding: 0;
+  margin: 0;
 }
 
 .node:hover {
   animation-name: hoverAnimation;
-  animation-duration: .1s;
+  animation-duration: .05s;
   animation-fill-mode: forwards;
 }
 .red {
