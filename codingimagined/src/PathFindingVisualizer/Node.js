@@ -28,6 +28,12 @@ export default class Node extends Component {
       return ("green");
     } else if (nodeState === "path") {
       return ("blue");
+    } else if(nodeState === "start") {
+      return ("start");
+    } else if(nodeState === "end") {
+      return("end");
+    } else if (nodeState === "wall") {
+      return("wall");
     } else {
       return("error");
     }
@@ -56,7 +62,7 @@ export default class Node extends Component {
              handleMouseDown()
           }}
             onMouseEnter={() => addNode(col, row)}
-            onMouseUp={() => handleMouseUp()}
+            onMouseUp={() => handleMouseUp(col, row)}
           >
         </div>
       );
