@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
 import "./PathFindingVisualizer.css";
+import { findAllByTestId } from "@testing-library/react";
 
 
 export default class PathFindingVisualizer extends Component {
@@ -13,6 +14,26 @@ export default class PathFindingVisualizer extends Component {
       mouseDown: false,
       currentSelection: "1"
     };
+    this.testD();
+  }
+
+  testD() {
+    const link = 'https://p2gxceaw95.execute-api.us-east-1.amazonaws.com/test';
+    let data = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+
+      })
+      }
+      fetch(link, data)
+      .then(response => response.json())  // promise
+      .then(response => {
+          console.log(response);
+          console.log(response['body'][0]);
+      })
   }
 
   createGrid() {
@@ -37,7 +58,8 @@ export default class PathFindingVisualizer extends Component {
           col: i,
           row: j,
           id: id,
-          state: nodeState
+          state: nodeState, 
+          weightvalue: 0
         });
         id++;
       }
@@ -99,6 +121,7 @@ export default class PathFindingVisualizer extends Component {
 
 
   render() {
+    console.log(this.state.grid);
     if (this.state.isLoading) {
       return <div></div>;
     } else {

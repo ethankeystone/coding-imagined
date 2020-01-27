@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../NavBar";
+import Block from "./Block";
 
 function Explore() {
     return ( 
@@ -8,6 +9,7 @@ function Explore() {
         <div>
             Explore Page
         </div>
+        <Block></Block>
     </div>
 
     );
