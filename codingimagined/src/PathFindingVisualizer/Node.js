@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./Node.css"
+import "../css/Node.css"
 
 export default class Node extends Component {
 
@@ -21,23 +21,6 @@ export default class Node extends Component {
     });
   }
 
-  determineColor(nodeState) {
-    if(nodeState === "none") {
-      return("none");
-    } else if (nodeState === "expand") {
-      return ("green");
-    } else if (nodeState === "path") {
-      return ("blue");
-    } else if(nodeState === "start") {
-      return ("start");
-    } else if(nodeState === "end") {
-      return("end");
-    } else if (nodeState === "wall") {
-      return("wall");
-    } else {
-      return("error");
-    }
-  }
   render() {
     const {
       col,
@@ -47,7 +30,7 @@ export default class Node extends Component {
       handleMouseUp,
       handleMouseDown
     } = this.props;
-    var color = this.determineColor(state)
+    var color = (state)
     this.state.color = color;
     if(this.state.isLoading === true) {
       return (
