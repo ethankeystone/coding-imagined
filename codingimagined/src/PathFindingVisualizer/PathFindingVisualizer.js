@@ -15,31 +15,28 @@ export default class PathFindingVisualizer extends Component {
       mouseDown: false,
       currentSelection: "1"
     };
-    // this.testD();
+    this.testD();
   }
 
-  // testD() {
-  //   const link = 'https://oz4akoxz8g.execute-api.us-east-2.amazonaws.com/Testing/';
-  //   let data = {
-  //     method: 'POST',
-  //     mode: 'no-cors',
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //         'grid':this.state.grid
-  //     })
-  //     }
-  //     fetch(link, data)
-  //     .then(response => response.json())  // promise // lmao
-  //     .then(response => {
-  //         //console.log(response);
-  //         //console.log(response['body'][0]);
-  //     })
-  // }
+  testD() {
+    const link = 'https://oz4akoxz8g.execute-api.us-east-2.amazonaws.com/Testing/';
+    let data = {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          'grid':this.state.grid
+      })
+      }
+      fetch(link, data)
+      .then(response => response.json())  // promise // lmao
+      .then(response => {
+          //console.log(response);
+          //console.log(response['body'][0]);
       })
   }
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
 
   createGrid() {
     let width = 15;
@@ -79,56 +76,34 @@ export default class PathFindingVisualizer extends Component {
 
   addNode(row, col) {
     if(this.state.mouseDown) {
-<<<<<<< HEAD
-      if(this.state.grid[col][row].state === "expand" || this.state.grid[col][row].state === "weight") {
-        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
-=======
       if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
       } else if(this.state.grid[col][row].state === "end") {
 
       } else if(this.state.grid[col][row].state === "start") {
 
       } else {
         if(this.state.currentSelection === "1") {
-<<<<<<< HEAD
-          this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "expand"}}}})});
-        } else if(this.state.currentSelection === "2") {
-          this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
-=======
           this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
         } else if(this.state.currentSelection === "2") {
           this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
         }
       }
     }
   }
 
   handleMouseDown(row, col) {
-<<<<<<< HEAD
-    if(this.state.grid[col][row].state === "expand" || this.state.grid[col][row].state === "weight") {
-      this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
-=======
     if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
       this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
     } else if(this.state.grid[col][row].state === "end") {
 
     } else if(this.state.grid[col][row].state === "start") {
 
     } else {
       if(this.state.currentSelection === "1") {
-<<<<<<< HEAD
-        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "expand"}}}})});
-      } else if (this.state.currentSelection === "2") {
-        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
-=======
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
       } else if (this.state.currentSelection === "2") {
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
       }
     }
     this.setState({mouseDown: true});
@@ -144,9 +119,6 @@ export default class PathFindingVisualizer extends Component {
       grid: this.createGrid()
     });
   }
-<<<<<<< HEAD
-
-=======
 
   randomAnimation() {
     setInterval(function() {
@@ -158,7 +130,6 @@ export default class PathFindingVisualizer extends Component {
 
       }.bind(this), 2000);
   }
->>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
 
 
   render() {
