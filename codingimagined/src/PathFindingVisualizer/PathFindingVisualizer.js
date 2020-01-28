@@ -21,21 +21,21 @@ export default class PathFindingVisualizer extends Component {
   testD() {
     const link = 'https://oz4akoxz8g.execute-api.us-east-2.amazonaws.com/Testing/';
     let data = {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-          'grid':this.state.grid
-      })
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              'grid':this.state.grid
+          })
       }
-      fetch(link, data)
-      .then(response => response.json())  // promise // lmao
-      .then(response => {
-          //console.log(response);
-          //console.log(response['body'][0]);
-      })
+    // fetch(link, data)
+    //   .then(response => response.json())  // promise // lmao
+    //   .then(response => {
+    //       console.log(response);
+    //       //console.log(response['body'][0]);
+    //   })
   }
 
   createGrid() {
