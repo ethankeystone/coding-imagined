@@ -1,0 +1,21 @@
+.block {
+    margin: 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 25%
+}
+
+.title {
+}
+
+.image {
+    width: 40%;
+    /* height: 20p; */
+}
+
+.projectDescription {
+    width: 80%;
+    text-align: justify;
+    position: relative;
+}

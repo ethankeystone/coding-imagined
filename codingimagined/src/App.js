@@ -1,11 +1,11 @@
 import React from "react";
 import "./css/App.css";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Explore from "./pages/Explore"
-import AboutUs from "./pages/AboutUs"
-import MoreStuff from "./pages/MoreStuff"
-import EvenMoreStuff from "./pages/EvenMoreStuff"
-import Home from "./pages/Home";
+import Explore from "./pages/Explore/Explore"
+import AboutUs from "./pages/AboutUs/AboutUs"
+import MoreStuff from "./pages/MoreStuff/MoreStuff"
+import EvenMoreStuff from "./pages/EvenMoreStuff/EvenMoreStuff"
+import Home from "./pages/Home/Home";
 
 function App() {
   return (

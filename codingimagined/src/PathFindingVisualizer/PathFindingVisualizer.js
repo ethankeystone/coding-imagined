@@ -1,13 +1,14 @@
 import React, { Component} from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
-import "./PathFindingVisualizer.css";
+import "../css/PathFindingVisualizer.css";
 import { findAllByTestId } from "@testing-library/react";
 
 
 export default class PathFindingVisualizer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isLoading: true,
       grid: null,
@@ -36,6 +37,9 @@ export default class PathFindingVisualizer extends Component {
   //         //console.log(response['body'][0]);
   //     })
   // }
+      })
+  }
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
 
   createGrid() {
     let width = 15;
@@ -70,39 +74,61 @@ export default class PathFindingVisualizer extends Component {
   }
 
   componentDidMount() {
-    this.resetGrid()
+    this.resetGrid();
   }
 
   addNode(row, col) {
     if(this.state.mouseDown) {
+<<<<<<< HEAD
       if(this.state.grid[col][row].state === "expand" || this.state.grid[col][row].state === "weight") {
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
+=======
+      if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
+        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
       } else if(this.state.grid[col][row].state === "end") {
 
       } else if(this.state.grid[col][row].state === "start") {
 
       } else {
         if(this.state.currentSelection === "1") {
+<<<<<<< HEAD
           this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "expand"}}}})});
         } else if(this.state.currentSelection === "2") {
           this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
+=======
+          this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
+        } else if(this.state.currentSelection === "2") {
+          this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
         }
       }
     }
   }
 
   handleMouseDown(row, col) {
+<<<<<<< HEAD
     if(this.state.grid[col][row].state === "expand" || this.state.grid[col][row].state === "weight") {
       this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
+=======
+    if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
+      this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
     } else if(this.state.grid[col][row].state === "end") {
 
     } else if(this.state.grid[col][row].state === "start") {
 
     } else {
       if(this.state.currentSelection === "1") {
+<<<<<<< HEAD
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "expand"}}}})});
       } else if (this.state.currentSelection === "2") {
         this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
+=======
+        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
+      } else if (this.state.currentSelection === "2") {
+        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
       }
     }
     this.setState({mouseDown: true});
@@ -118,7 +144,21 @@ export default class PathFindingVisualizer extends Component {
       grid: this.createGrid()
     });
   }
+<<<<<<< HEAD
 
+=======
+
+  randomAnimation() {
+    setInterval(function() {
+        var current = null;
+        var height = Math.random() * 14;
+        var width = Math.random() * 39;
+        this.setState({grid: update(this.state.grid, {[Math.round(height)]: {[Math.round(width)]: {state: {$set: "expand"}}}})});
+
+
+      }.bind(this), 2000);
+  }
+>>>>>>> fcbd8005ffc46cf8169c8549b10fb5bed6972cd8
 
 
   render() {

@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../NavBar";
-import PathFindingVisualizer from "../PathFindingVisualizer/PathFindingVisualizer.js";
+import NavBar from "../Base/NavBar.js";
+import PathFindingVisualizer from "../../PathFindingVisualizer/PathFindingVisualizer.js";
 function Home() {
 
   return (
