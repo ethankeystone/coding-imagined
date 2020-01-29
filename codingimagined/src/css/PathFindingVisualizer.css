@@ -12,7 +12,6 @@
 }
 
 button {
-    width: 100px;
     height: 20px;
     color: #026917;
     margin: 20px;
@@ -22,6 +21,7 @@ button {
     border: 3px;
     border-color: #026917;
     border-style: solid; 
+    text-align: center;
 }
 
 label {

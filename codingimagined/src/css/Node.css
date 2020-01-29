@@ -1,10 +1,33 @@
-.node {
+.nodeRendered {
   width: 35px;
   height: 35px;
   outline: 1px solid rgb(175, 216, 248);
   display: inline-block;
   padding: 0;
   margin: 0;
+  animation-name: nodeCreation;
+  animation-duration: .7s;
+}
+
+.nodeNotRendered {
+  width: 35px;
+  height: 35px;
+  outline: 1px;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+
+}
+@keyframes nodeCreation {
+  25% {outline: 1px solid rgb(175, 216, 248);; transform: scale(.25);}
+  50% {outline: 1px solid rgb(175, 216, 248);; transform: scale(.75);}
+  75% {outline: 1px solid rgb(175, 216, 248);; transform: scale(1.2);}
+  100% {outline: 1px solid rgb(175, 216, 248);; transform: scale(1);}
+}
+
+
+.nodeEmpty {
+
 }
 
 .node:hover {
