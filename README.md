@@ -1,2 +1,2 @@
 
-#This is the source code for the CodingImagined website :)
+# This is the source code for the CodingImagined website :)
