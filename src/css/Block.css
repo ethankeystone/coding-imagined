@@ -3,10 +3,16 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    width: 25%
+    width: 25%;
+    outline: 3px solid green;
+    padding: 2% 0%;
 }
 
 .title {
+    color: green;
+    padding-bottom: 4px;
+    font-weight: bolder;
+    font-size: larger;
 }
 
 .image {
@@ -18,4 +24,5 @@
     width: 80%;
     text-align: justify;
     position: relative;
+    color: green;
 }

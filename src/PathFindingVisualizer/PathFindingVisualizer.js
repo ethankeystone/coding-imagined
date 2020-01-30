@@ -2,8 +2,6 @@ import React, { Component} from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
 import "../css/PathFindingVisualizer.css";
-import { findAllByTestId } from "@testing-library/react";
-
 
 export default class PathFindingVisualizer extends Component {
   constructor(props) {
@@ -15,28 +13,8 @@ export default class PathFindingVisualizer extends Component {
       mouseDown: false,
       currentSelection: "1"
     };
-    this.testD();
   }
 
-  testD() {
-    const link = 'https://oz4akoxz8g.execute-api.us-east-2.amazonaws.com/Testing/';
-    let data = {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              'grid':this.state.grid
-          })
-      }
-    // fetch(link, data)
-    //   .then(response => response.json())  // promise // lmao
-    //   .then(response => {
-    //       console.log(response);
-    //       //console.log(response['body'][0]);
-    //   })
-  }
 
   createGrid() {
     let width = 15;
@@ -61,7 +39,8 @@ export default class PathFindingVisualizer extends Component {
           row: j,
           id: id,
           state: nodeState,
-          weightvalue: 0
+          weightvalue: 0,
+          isRendered: false
         });
         id++;
       }
@@ -73,6 +52,8 @@ export default class PathFindingVisualizer extends Component {
   componentDidMount() {
     this.resetGrid();
   }
+
+
 
   addNode(row, col) {
     if(this.state.mouseDown) {
@@ -92,20 +73,10 @@ export default class PathFindingVisualizer extends Component {
     }
   }
 
+  
+
   handleMouseDown(row, col) {
-    if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
-      this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
-    } else if(this.state.grid[col][row].state === "end") {
-
-    } else if(this.state.grid[col][row].state === "start") {
-
-    } else {
-      if(this.state.currentSelection === "1") {
-        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
-      } else if (this.state.currentSelection === "2") {
-        this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
-      }
-    }
+    this.addNode(row, col);
     this.setState({mouseDown: true});
   }
 
@@ -114,32 +85,56 @@ export default class PathFindingVisualizer extends Component {
   }
 
   resetGrid() {
+
     this.setState({
       isLoading: false,
       grid: this.createGrid()
     });
   }
+  
+  generateRandomGrid() {
+    let width = 15;
+    let height = 40;
+    var grid = [];
+    var id = 0;
 
-  randomAnimation() {
-    setInterval(function() {
-        var current = null;
-        var height = Math.random() * 14;
-        var width = Math.random() * 39;
-        this.setState({grid: update(this.state.grid, {[Math.round(height)]: {[Math.round(width)]: {state: {$set: "expand"}}}})});
+    let startNode = {col: 7, row: 5};
+    let endNode = {col: 7, row: 30};
 
-
-      }.bind(this), 2000);
+    for (let i = 0; i < width; i++) {
+      const currentRow = [];
+      for (let j = 0; j < height; j++) {
+        let nodeState = "expand"
+        if(i === startNode.col && j === startNode.row) {
+          nodeState = "start";
+        } else if (i === endNode.col && j === endNode.row) {
+          nodeState = "end";
+        }
+        currentRow.push({
+          col: i,
+          row: j,
+          id: id,
+          state: nodeState,
+          weightvalue: 0,
+          isRendered: false
+        });
+        id++;
+      }
+      grid.push(currentRow);
+      }
+    this.setState({
+      isLoading: false,
+      grid: grid
+    });
   }
-
-
   render() {
-    console.log(this.state.grid);
     if (this.state.isLoading) {
       return <div></div>;
     } else {
       let grid = this.state.grid;
       return (
         <div className="center">
+          <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
           <button onClick={() => this.resetGrid()}> Reset Grid </button>
           <label htmlFor="Weight">Toggle Weights </label>
           <select id = "Weight" onChange={(option)=>this.setState({currentSelection: option.target.value})}>
@@ -160,10 +155,12 @@ export default class PathFindingVisualizer extends Component {
                     col={node.col}
                     row={node.row}
                     key={node.id}
+                    id={node.id}
                     addNode={(row, col) => this.addNode(node.row, node.col)}
                     handleMouseDown={(row, col) => this.handleMouseDown(node.row, node.col)}
                     handleMouseUp={() => this.handleMouseUp()}
-                    state={node.state}
+                    state= {node.state}
+                    isRendered={false}
                     ></Node>;
                 })}
               </div>

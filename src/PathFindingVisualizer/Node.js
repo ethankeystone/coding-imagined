@@ -8,7 +8,8 @@ export default class Node extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      color: "none"
+      color: "none",
+      isRendered: this.props.isRendered
     }
   }
 
@@ -17,8 +18,17 @@ export default class Node extends Component {
       isLoading: false,
       color: "none",
       col: this.props.col,
-      row: this.props.row
+      row: this.props.row,
+      isRendered: false
     });
+
+    setTimeout(
+      function() {
+        this.setState({isRendered: true})
+      }
+      .bind(this),
+      this.props.id * 5
+    );
   }
 
   render() {
@@ -30,8 +40,7 @@ export default class Node extends Component {
       handleMouseUp,
       handleMouseDown
     } = this.props;
-    var color = (state)
-    this.state.color = color;
+
     if(this.state.isLoading === true) {
       return (
         <div className={"node "}>
@@ -40,10 +49,8 @@ export default class Node extends Component {
       );
     } else {
       return (
-        <div className={"node " + this.state.color}
-           onMouseDown={() => {
-             handleMouseDown()
-          }}
+        <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+            onMouseDown={() => {handleMouseDown()}}
             onMouseEnter={() => addNode(col, row)}
             onMouseUp={() => handleMouseUp(col, row)}
           >
