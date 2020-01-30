@@ -6,9 +6,12 @@
     color: green;
 }
 .row {
-    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
     padding: 0;
     font-size: 0;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 button {
@@ -21,7 +24,7 @@ button {
     border-radius: 5px;
     border: 3px;
     border-color: #026917;
-    border-style: solid; 
+    border-style: solid;
 }
 
 label {

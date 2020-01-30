@@ -12,8 +12,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path={process.env.PUBLIC_URL + '/'} component={Home}/>
-          <Route path={process.env.PUBLIC_URL + '/about'} component={AboutUs}/>
+          <Route exact path="/" component={Home}/>
+          <Route path="/about" component={AboutUs}/>
           <Route path="/explore" component={Explore}/>
           <Route path="/moreStuff" component={MoreStuff}/>
           <Route path="/EvenMoreStuff" component={EvenMoreStuff}/>
