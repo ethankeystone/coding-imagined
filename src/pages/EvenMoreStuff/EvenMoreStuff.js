@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-export default class EvenMoreStuff {
+export default function EvenMoreStuff() {
     return (
             <div>
                 <NavBar></NavBar>
