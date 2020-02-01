@@ -137,19 +137,24 @@ export default class PathFindingVisualizer extends Component {
             if (this.state.stopAnimation) {
                 this.state.stopAnimation = false;
             }
-            let algo = new AStar(this.state.grid, this.state.grid[5][5], this.state.grid[0][30]);
+            let algo = new AStar(this.state.grid, this.state.grid[5][5], this.state.grid[2][30]);
 
             let output = algo.order;
-
-            console.log(algo.order);
-            for (let i = 0; i < output.length; i++) {
-                setInterval(
-                    function() {
-                        this.setState({grid: update(this.state.grid, {[output[i].col]: {[output[i].row]: {state: {$set: "wall"}}}})});
+            let count = 0;
+            var stop = setInterval(
+                    function(y) {
+                        y = count;
+                        if (y > output.length - 1) {
+                            console.log("stop");
+                            clearInterval(stop);
+                        } else {
+                            console.log(y);
+                            this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
+                            count++;
+                        }
                     }.bind(this),
-                    i * 200
+                    count * 200, count
                 );
-            }
         }
     }
     
