@@ -117,6 +117,7 @@ export default class PathFindingVisualizer extends Component {
             grid: grid
         });
     }
+    
     render() {
         if (this.state.isLoading) {
             return <div></div>;

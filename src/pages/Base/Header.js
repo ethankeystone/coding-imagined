@@ -3,8 +3,9 @@ import logo from "../../images/codinglogo.svg";
 import {Link} from "react-router-dom";
 import "../../css/NavBar.css";
 
-export default class Header {
-    return (
+export default class Header extends React.Component {
+    render() {
+        return (
             <header>
                 <div className = "container">
                 <img src={logo} className="App-logo" id="App-logo" alt="logo" />
@@ -40,4 +41,5 @@ export default class Header {
                 </div>
             </header>
         );
+    }
 }
