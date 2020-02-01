@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../pages/Base/NavBar.js";
+import NavBar from "../Base/NavBar.js";
 import PathFindingVisualizer from "./PathFindingVisualizer.js";
 function PathFindingVisualizerPage() {
   return (
