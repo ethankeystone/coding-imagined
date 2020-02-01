@@ -1,16 +1,14 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-function AboutUs() {
-    return ( 
-        <div>
-            <NavBar></NavBar>
+export default class AboutUs {
+    return (
             <div>
-               About Us
+                <NavBar></NavBar>
+                <div>
+                   About Us
+                </div>
             </div>
-        </div>
 
-    );
+        );
 }
-
-export default AboutUs;

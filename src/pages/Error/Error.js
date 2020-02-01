@@ -1,15 +1,13 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-function Error() {
-    return ( 
-        <div>
-            <NavBar></NavBar>
+export default class Error {
+    return (
             <div>
-                404 Error
+                <NavBar></NavBar>
+                <div>
+                    404 Error
+                </div>
             </div>
-        </div>
-    );
+        );
 }
-
-export default Error;

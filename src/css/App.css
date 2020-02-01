@@ -1,44 +1,45 @@
-
 .App-logo {
-  height: 7vmin;
-  pointer-events: none;
-  position: absolute;
-  left: 1vh;
-  top: 1vh;
-  opacity: 100%;
+    height: 7vmin;
+    pointer-events: none;
+    position: absolute;
+    left: 1vh;
+    top: 1vh;
+    opacity: 100%;
 }
-
 
 .buttons {
-  color: #026917;
-  font-family: "Courier New";
+    color: #026917;
+    font-family: "Courier New";
 }
 
-li{
-  list-style: none;
+li {
+    list-style: none;
 }
 
 .button {
-  color: #026917;
+    color: #026917;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  #App-logo-two {
-    animation: App-logo-alternate infinite alternate 1s ;
-  }
+    #App-logo-two {
+        animation: App-logo-alternate infinite alternate 1s;
+    }
 }
 
 @keyframes App-logo-alternate {
-  0% {
-    opacity: 0;
-  }
-  49% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+
+    49% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

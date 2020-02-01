@@ -1,6 +1,7 @@
 import React from "react";
 import "./css/App.css";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Base from "./pages/Base/Base";
 import Explore from "./pages/Explore/Explore";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import MoreStuff from "./pages/MoreStuff/MoreStuff";

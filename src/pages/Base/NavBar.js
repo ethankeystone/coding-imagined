@@ -3,8 +3,8 @@ import logo from "../../images/codinglogo.svg";
 import {Link} from "react-router-dom";
 import "../../css/NavBar.css";
 
-function NavBar() {
-    return ( 
+export default class NavBar extends React.Component {
+    return (
         <header>
             <div className = "container">
             <img src={logo} className="App-logo" id="App-logo" alt="logo" />
