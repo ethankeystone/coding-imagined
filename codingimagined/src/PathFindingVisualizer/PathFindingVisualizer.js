@@ -3,7 +3,8 @@ import Node from "./Node";
 import update from 'immutability-helper';
 import "./PathFindingVisualizer.css";
 import { findAllByTestId } from "@testing-library/react";
-
+import Dijkstra from './Algorithms/Dijkstra.js';
+import AStar from './Algorithms/AStar';
 
 export default class PathFindingVisualizer extends Component {
   constructor(props) {
@@ -14,27 +15,6 @@ export default class PathFindingVisualizer extends Component {
       mouseDown: false,
       currentSelection: "1"
     };
-    this.testD();
-  }
-
-  testD() {
-    const link = 'https://oz4akoxz8g.execute-api.us-east-2.amazonaws.com/Testing/';
-    let data = {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-          'grid':this.state.grid
-      })
-      }
-      fetch(link, data)
-      .then(response => response.json())  // promise // lmao
-      .then(response => {
-          //console.log(response);
-          //console.log(response['body'][0]);
-      })
   }
 
   createGrid() {
@@ -114,18 +94,31 @@ export default class PathFindingVisualizer extends Component {
 
   resetGrid() {
     this.setState({
-      isLoading: false,
-      grid: this.createGrid()
+      grid: this.createGrid(),
+      isLoading: false
     });
   }
   
 
 
   render() {
-    console.log(this.state.grid);
     if (this.state.isLoading) {
       return <div></div>;
     } else {
+      if(this.state.grid != null){
+        //const dij = new Dijkstra(this.state.grid);
+        const aStar = new AStar(
+          this.state.grid, 
+          this.state.grid[0][0], 
+          this.state.grid[this.state.grid.length - 1][this.state.grid[0].length - 1]
+        );
+        let next = true;
+        while(next != false){
+        next = aStar.next();
+        console.log(next);
+        }
+      }
+      
       let grid = this.state.grid;
       return (
         <div className="center">
@@ -161,6 +154,7 @@ export default class PathFindingVisualizer extends Component {
           </div>
         </div>
       );
+      
     }
   }
 }
