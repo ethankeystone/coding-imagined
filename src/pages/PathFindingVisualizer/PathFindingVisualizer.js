@@ -138,7 +138,7 @@ export default class PathFindingVisualizer extends Component {
             if (this.state.isRunningAnimation) {
                 this.state.isRunningAnimation = false;
             }
-            let algo = new AStar(this.state.grid, this.state.grid[5][5], this.state.grid[2][30]);
+            let algo = new AStar(this.state.grid, this.state.grid[7][5], this.state.grid[7][30]);
 
             let output = algo.order;
             let count = 0;
