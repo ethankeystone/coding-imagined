@@ -6,7 +6,7 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import MoreStuff from "./pages/MoreStuff/MoreStuff";
 import EvenMoreStuff from "./pages/EvenMoreStuff/EvenMoreStuff";
 import Home from "./pages/Home/Home";
-import PathFindingVisualizerPage from "./PathFindingVisualizer/PathFindingVisualizerPage";
+import PathFindingVisualizerPage from "./pages/PathFindingVisualizer/PathFindingVisualizerPage";
 
 function App() {
     return (

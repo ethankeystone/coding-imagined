@@ -1,7 +1,7 @@
 import React, { Component} from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
-import "../css/PathFindingVisualizer.css";
+import "../../css/PathFindingVisualizer.css";
 
 export default class PathFindingVisualizer extends Component {
   constructor(props) {

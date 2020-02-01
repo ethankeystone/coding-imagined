@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../css/Node.css"
+import "../../css/Node.css"
 
 export default class Node extends Component {
 
