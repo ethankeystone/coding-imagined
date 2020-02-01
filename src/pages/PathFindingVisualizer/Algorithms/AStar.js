@@ -88,6 +88,7 @@ export default class AStar{
         return [this.order[this.orderIndex], this.openListOrder[this.orderIndex]];
     }
 
+    //simple helper function, takes in list and element and returns true if element in list
     Contains(list, element){
         if(list.indexOf(element) != -1){
             console.log(list.indexOf(element));
