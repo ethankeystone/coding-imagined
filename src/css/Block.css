@@ -1,0 +1,28 @@
+.block {
+    margin: 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 25%;
+    outline: 3px solid green;
+    padding: 2% 0%;
+}
+
+.title {
+    color: green;
+    padding-bottom: 4px;
+    font-size: larger;
+}
+
+.image {
+    width: 40%;
+    /* height: 20p; */
+}
+
+.projectDescription {
+    width: 80%;
+    text-align: justify;
+    position: relative;
+    color: green;
+    text-decoration: none;
+}

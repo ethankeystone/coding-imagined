@@ -1,0 +1,91 @@
+.nodeRendered {
+    width: 35px;
+    height: 35px;
+    outline: 1px solid rgb(175, 216, 248);
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    animation-name: nodeCreation;
+    animation-duration: .7s;
+}
+
+.nodeNotRendered {
+    width: 35px;
+    height: 35px;
+    outline: 1px;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+
+}
+@keyframes nodeCreation {
+    25% {outline: 1px solid rgb(175, 216, 248);; transform: scale(.25);}
+    50% {outline: 1px solid rgb(175, 216, 248);; transform: scale(.75);}
+    75% {outline: 1px solid rgb(175, 216, 248);; transform: scale(1.2);}
+    100% {outline: 1px solid rgb(175, 216, 248);; transform: scale(1);}
+}
+
+
+.nodeEmpty {
+
+}
+
+.node:hover {
+
+}
+
+.expand:hover {
+    background-color: blue;
+}
+
+.expand {
+    background-color: green;
+    animation-name: expansionAnimation;
+    animation-duration: .7s;
+}
+.start {
+    background-color: orange;
+}
+
+.end {
+    background-color: purple;
+}
+
+.wall {
+    background-color: black;
+    animation-name: wallAnimation;
+    animation-duration: .7s;
+}
+
+.weight {
+    background-color: red;
+    animation-name: weightAnimation;
+    animation-duration: .7s;
+}
+
+@keyframes weightAnimation {
+    25% {background-color: rgb(196, 153, 155); transform: scale(.25);}
+    50% {background-color: rgb(221, 60, 68); transform: scale(.75);}
+    75% {background-color: rgb(219, 27, 27); transform: scale(1.2);}
+    100% {background-color: #ff0000; transform: scale(1);}
+}
+
+@keyframes hoverAnimation {
+    25% {background-color: #B6F2D4; transform: scale(.25);}
+    50% {background-color: #1AFF8D; transform: scale(.75);}
+    75% {background-color: #02B55B; transform: scale(1.2);}
+    100% {background-color: #026917; transform: scale(1);}
+}
+@keyframes expansionAnimation {
+    25% {background-color: #B6F2D4; transform: scale(.25);}
+    50% {background-color: #1AFF8D; transform: scale(.75);}
+    75% {background-color: #02B55B; transform: scale(1.2);}
+    100% {background-color: #026917; transform: scale(1);}
+}
+
+@keyframes wallAnimation{
+    25% {background-color: rgba(136, 139, 138, 0.205); transform: scale(.25);}
+    50% {background-color: rgb(6, 139, 138, 0.205); transform: scale(.75);}
+    75% {background-color: rgba(32, 32, 32, 0.205); transform: scale(1.2);}
+    100% {background-color: rgba(0, 0, 0, 0.205); transform: scale(1);}
+}
