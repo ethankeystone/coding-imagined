@@ -9,20 +9,22 @@ import Home from "./pages/Home/Home";
 import PathFindingVisualizerPage from "./PathFindingVisualizer/PathFindingVisualizerPage";
 
 function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/about" component={AboutUs}/>
-          <Route path="/explore" component={Explore}/>
-          <Route path="/moreStuff" component={MoreStuff}/>
-          <Route path="/EvenMoreStuff" component={EvenMoreStuff}/>
-          <Route path="/PathFindingVisualizer" component={PathFindingVisualizerPage}/>
-        </Switch>
-      </Router>
-    </div>
-  );
+    return (
+            <div className="App">
+                <Base>
+                    <Router>
+                        <Switch>
+                            <Route exact path="/" component={Home}/>
+                            <Route path="/about" component={AboutUs}/>
+                            <Route path="/explore" component={Explore}/>
+                            <Route path="/moreStuff" component={MoreStuff}/>
+                            <Route path="/EvenMoreStuff" component={EvenMoreStuff}/>
+                            <Route path="/PathFindingVisualizer" component={PathFindingVisualizerPage}/>
+                        </Switch>
+                    </Router>
+                </Base>
+            </div>
+        );
 }
 
 export default App;
