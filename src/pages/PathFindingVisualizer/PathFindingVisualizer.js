@@ -13,7 +13,8 @@ export default class PathFindingVisualizer extends Component {
             grid: null,
             mouseDown: false,
             currentSelection: "1",
-            stopAnimation: false
+            stopAnimation: false,
+            isRunningAnimation: false
         };
     }
 
@@ -133,7 +134,8 @@ export default class PathFindingVisualizer extends Component {
     }
 
     findPath() {
-        if (this.state.grid != null) {
+        if (this.state.grid != null && !this.state.isRunningAnimation) {
+            this.state.isRunningAnimation = true;
             if (this.state.stopAnimation) {
                 this.state.stopAnimation = false;
             }
@@ -155,6 +157,7 @@ export default class PathFindingVisualizer extends Component {
                     }.bind(this),
                     count * 200, count
                 );
+            this.state.isRunningAnimation = false;
         }
     }
     
