@@ -24,7 +24,7 @@ export default class Node extends Component {
                 function() {
                     this.setState({isRendered: true})
                 }.bind(this),
-                this.props.id * 5
+                this.props.renderTime * 5
             );
     }
 

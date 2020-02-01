@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
 import "../../css/PathFindingVisualizer.css";
+import AStar from "./Algorithms/AStar"
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ export default class PathFindingVisualizer extends Component {
             isLoading: true,
             grid: null,
             mouseDown: false,
-            currentSelection: "1"
+            currentSelection: "1",
+            stopAnimation: false
         };
     }
 
@@ -34,13 +36,15 @@ export default class PathFindingVisualizer extends Component {
                 } else if (i === endNode.col && j === endNode.row) {
                     nodeState = "end";
                 }
+                let renderTime = j + i;
                 currentRow.push({
                     col: i,
                     row: j,
-                    id: id,
                     state: nodeState,
+                    id: id,
                     weightvalue: 0,
-                    isRendered: false
+                    isRendered: false,
+                    renderTime: renderTime
                 });
                 id++;
             }
@@ -85,7 +89,7 @@ export default class PathFindingVisualizer extends Component {
     }
 
     resetGrid() {
-
+        this.state.stopAnimation = true;
         this.setState({
             isLoading: false,
             grid: this.createGrid()
@@ -127,6 +131,27 @@ export default class PathFindingVisualizer extends Component {
             grid: grid
         });
     }
+
+    findPath() {
+        if (this.state.grid != null) {
+            if (this.state.stopAnimation) {
+                this.state.stopAnimation = false;
+            }
+            let algo = new AStar(this.state.grid, this.state.grid[5][5], this.state.grid[0][30]);
+
+            let output = algo.order;
+
+            console.log(algo.order);
+            for (let i = 0; i < output.length; i++) {
+                setInterval(
+                    function() {
+                        this.setState({grid: update(this.state.grid, {[output[i].col]: {[output[i].row]: {state: {$set: "wall"}}}})});
+                    }.bind(this),
+                    i * 200
+                );
+            }
+        }
+    }
     
     render() {
         if (this.state.isLoading) {
@@ -137,6 +162,7 @@ export default class PathFindingVisualizer extends Component {
                     <div className="center">
                         <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
                         <button onClick={() => this.resetGrid()}> Reset Grid </button>
+                        <button onClick={() => this.findPath()}> Find Path </button>
                         <label htmlFor="Weight">Toggle Weights </label>
                         <select id = "Weight" onChange={(option)=>this.setState({currentSelection: option.target.value})}>
                                  <option value = "1">Wall</option>
@@ -156,7 +182,7 @@ export default class PathFindingVisualizer extends Component {
                                             col={node.col}
                                             row={node.row}
                                             key={node.id}
-                                            id={node.id}
+                                            renderTime={node.renderTime}
                                             addNode={(row, col) => this.addNode(node.row, node.col)}
                                             handleMouseDown={(row, col) => this.handleMouseDown(node.row, node.col)}
                                             handleMouseUp={() => this.handleMouseUp()}
