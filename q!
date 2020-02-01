@@ -1,0 +1,267 @@
+[33mcommit 4f50cf44c76fd803379b8a6d1a9fff500ee61458[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Fri Jan 31 19:46:50 2020 -0500
+
+    fixed some non-loading files
+
+[33mcommit 95ab5fa9853548e93ab7cf43b25c0dd346e1ec36[m
+Merge: fd43685 ea8bfc8
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 19:37:22 2020 -0500
+
+    merge conflicts!
+
+[33mcommit fd43685413563a9cdf5df09ef4ea5fe7b458c044[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 19:30:45 2020 -0500
+
+    fix code formtting :)
+
+[33mcommit ea8bfc81e2691a29c9fbf99e996aee9ebce21a89[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Fri Jan 31 19:21:27 2020 -0500
+
+     fixed explore page
+
+[33mcommit fa49acac693cf736061182c000a193ded59fbcd6[m
+Merge: 26cd8d5 8f70134
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 19:08:18 2020 -0500
+
+    Merge branch 'master' of https://github.com/ethankeystone/CodingImagined
+
+[33mcommit 26cd8d5d90894ec2f5112e3555e9132c10e3310a[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 19:08:16 2020 -0500
+
+    set up base page
+
+[33mcommit 8f70134ad1465a1ca62ff542b22f26d5423008a3[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Fri Jan 31 19:07:49 2020 -0500
+
+    fixed references
+
+[33mcommit f156e53fab152801bae0ceb880f80f2d663efabb[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 18:55:24 2020 -0500
+
+    restructure files
+
+[33mcommit 901c4ea7b72e3c62b8972c544a1a048a80a770bc[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Fri Jan 31 18:54:54 2020 -0500
+
+    refactoring file structure for convenient page heirarchy
+
+[33mcommit b51037ed3266b076900baf7c4b2f588263823738[m
+Merge: 78828cc 8e0f4d5
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Wed Jan 29 22:01:08 2020 -0500
+
+    merge conflicts
+
+[33mcommit 78828cc864dc1a350f8b6172d8c6cca080adc4e3[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Wed Jan 29 21:59:43 2020 -0500
+
+    move file structure
+
+[33mcommit 8e0f4d5d8f32c400d98131e54cb30127acb4c333[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Wed Jan 29 21:56:58 2020 -0500
+
+    Update README.md
+
+[33mcommit d47092bc9a56f3e9af57f13fb8732ad04852663a[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Wed Jan 29 21:56:48 2020 -0500
+
+    Update README.md
+
+[33mcommit 7a59834a6113bff34d1a486b3c75a1759867421d[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Wed Jan 29 21:48:02 2020 -0500
+
+    fix row css
+
+[33mcommit 2acd0c789a0ee53ebc590a4101d40d5008b6315f[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Wed Jan 29 21:47:53 2020 -0500
+
+    fix row css
+
+[33mcommit f6c1ae8b4a62224fc0b2e4726bbdc62ad119ec5f[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Wed Jan 29 17:40:02 2020 -0500
+
+    Update README.md
+
+[33mcommit 5288c4b637bb6f682928167c33fe678cbf4c4252[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Wed Jan 29 17:38:39 2020 -0500
+
+    fixed file directory
+
+[33mcommit 2c25280815adb42457c66fddddc87f8920bc6cf4[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Wed Jan 29 17:36:22 2020 -0500
+
+    added initial animation to grid creation
+
+[33mcommit 8278d53659bbfe26513fc26a52d668ec01a450f4[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Tue Jan 28 00:15:42 2020 -0500
+
+    remove nonfunctional api call
+
+[33mcommit 7f12f3d5952a8387d8389df310d07494fe39f275[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Tue Jan 28 00:11:47 2020 -0500
+
+    fix PathVisualizer.js
+
+[33mcommit 2075bf32278126e5c1a5352ccaa71a9d084a4c7c[m
+Merge: ef3637d fcbd800
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Tue Jan 28 00:08:01 2020 -0500
+
+    fix merge conflict
+
+[33mcommit ef3637dd939ceed349eacb2d046638a71a8b1342[m
+Author: Mudit Gupta <muditg317@gmail.com>
+Date:   Tue Jan 28 00:06:54 2020 -0500
+
+    fix pathfinding visualizer
+
+[33mcommit fcbd8005ffc46cf8169c8549b10fb5bed6972cd8[m
+Merge: 3373af1 6c572d6
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Tue Jan 28 00:04:27 2020 -0500
+
+    fixed directory
+
+[33mcommit 3373af15dc6f55d0e04ad64682746a44f4cc17ac[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Tue Jan 28 00:03:57 2020 -0500
+
+    fixed directory
+
+[33mcommit 6c572d622e3a28df8ae9f6df10d6fcefb99ea612[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Mon Jan 27 12:18:57 2020 -0700
+
+    s is a comment wooooooooooo
+
+[33mcommit 91179fe5a7f9b7ce2f267084f931beaf44e5eef5[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Sun Jan 26 23:42:38 2020 -0500
+
+    added api statement
+
+[33mcommit c8bdded58952e5f000388bf16d5cb0dd51756304[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Fri Jan 24 19:03:59 2020 -0500
+
+    Added ability to place weights
+
+[33mcommit 5b4cfa3af2d11cff91a9e90a7df09aa507de461f[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 23 21:27:45 2020 -0500
+
+    added mouse down and mouse hover features
+
+[33mcommit 0659da4d6166ced5cd45941e0bd3b7465d41c1c5[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 16 11:42:33 2020 -0500
+
+    fix
+
+[33mcommit b2fff947fc4b82a7e288e2140fd14eb1ba6a621f[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Sun Jan 12 16:25:39 2020 -0700
+
+    hing the colors
+    woooo
+
+[33mcommit c608bc188102aac58f6085434d11ec1933292b57[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Sun Jan 12 18:04:30 2020 -0500
+
+    Fixed grid layout
+
+[33mcommit 8d256266a1b6c541847bbd53dc7e70eeb991789b[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Sat Jan 11 12:45:04 2020 -0500
+
+    added basic grid
+
+[33mcommit ea11f13d120822c67f8ecf76aefaf4d86fc16ac0[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 9 12:04:59 2020 -0500
+
+    added some final css changes and fixed some spacing issues
+
+[33mcommit 10621806cbfa861da90627d6e100d6031fb17423[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 9 11:31:13 2020 -0500
+
+    fixed css and website stuff
+
+[33mcommit 94cf1aaefc436a4abd96faddfefb184246e5de7f[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Wed Jan 8 19:13:33 2020 -0700
+
+    dded the logo animation with a nifty little css animation trick
+    woooooooooooooooooo
+
+[33mcommit 33a92af98ac283e0624f60533f05760268909eb8[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Tue Jan 7 15:15:21 2020 -0500
+
+    Hadded NavBar component
+
+[33mcommit a778dd7003a44f7ced82c671ea3bdae2177c626c[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Tue Jan 7 12:08:47 2020 -0500
+
+    Added routers and links
+
+[33mcommit 502e07436e66ed222cd470c2b0419e8b13979f76[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Sun Jan 5 18:46:43 2020 -0700
+
+    dded in the bar with the text n stuff
+    yeah
+
+[33mcommit dc54eb82270b865a8de57e78f2ea4df7a58930b1[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Sun Jan 5 16:57:20 2020 -0700
+
+    dk why this is happeing
+    super annying
+
+[33mcommit 404fe135b302d72fc292144cd9d62b6c018a4524[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Sun Jan 5 16:48:49 2020 -0700
+
+    Removed the template stuff and added
+    logo
+
+[33mcommit 59b86afca6c40f260c2e0f1fa6a47a1c20d29616[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 2 20:03:38 2020 -0700
+
+    react app created
+
+[33mcommit a6e57873f3e80d70cab64ffd748f899fb380d8bd[m
+Author: ethankeystone <ethankeystone@live.com>
+Date:   Thu Jan 2 20:00:42 2020 -0700
+
+    'test'
+
+[33mcommit 901a0aeb4f1bb337a7b23f3926ee3b77442e93f9[m
+Author: JacksonWakefield <55509800+JacksonWakefield@users.noreply.github.com>
+Date:   Thu Jan 2 19:10:46 2020 -0700
+
+    Create newfile
