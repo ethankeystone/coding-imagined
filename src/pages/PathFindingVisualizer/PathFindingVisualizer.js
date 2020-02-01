@@ -135,9 +135,8 @@ export default class PathFindingVisualizer extends Component {
 
     findPath() {
         if (this.state.grid != null && !this.state.isRunningAnimation) {
-            this.state.isRunningAnimation = true;
-            if (this.state.stopAnimation) {
-                this.state.stopAnimation = false;
+            if (this.state.isRunningAnimation) {
+                this.state.isRunningAnimation = false;
             }
             let algo = new AStar(this.state.grid, this.state.grid[5][5], this.state.grid[2][30]);
 

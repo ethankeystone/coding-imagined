@@ -78,8 +78,6 @@ export default class AStar extends Pathfinder {
           }
         }
       });
-      console.log(this.gList);
-      console.log(this.hList);
     }
     //open set is empty but goal never reached
     return -1;
