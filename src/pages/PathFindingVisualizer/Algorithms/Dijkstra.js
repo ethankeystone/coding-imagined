@@ -1,105 +1,82 @@
-export default class Dijkstra
-{
-    constructor(grid)
-    {
-        this.grid = grid;
+import Pathfinder from "./Pathfinder";
 
-        this.height = grid.length;
-        this.width = grid[0].length;
+export default class Dijkstra extends Pathfinder {
+  constructor(grid, startNode, endNode) {
+    super(grid, startNode, endNode);
 
-        this.distance = new Array(this.height).fill(10000).map(() => new Array(this.width).fill(10000));
-        this.previous = new Array(this.height).fill([0, 0]).map(() => new Array(this.width).fill([0, 0]));
+    this.distance = new Array(this.height)
+      .fill(10000)
+      .map(() => new Array(this.width).fill(10000));
+    this.previous = new Array(this.height)
+      .fill([0, 0])
+      .map(() => new Array(this.width).fill([0, 0]));
 
-        this.order = new Array();
+    this.run();
 
-        this.run();
+    while (this.order_index < this.width * this.height) {
+      console.log(this.next());
+    }
+  }
 
-        this.order_index = -1; // start in neg for first iteration
+  //main function, returns grid
+  run() {
+    //make Q into list of all nodes
+    const Q = [];
+    for (let x = 0; x < this.grid.length; x++) {
+      for (let y = 0; y < this.grid[0].length; y++) {
+        Q.push(this.grid[x][y]);
+      }
+    }
 
-        while (this.order_index < this.width * this.height){
-            console.log(this.next());
+    //set distance of start node to smallest value, 0
+    this.distance[this.startNode["col"]][this.startNode["end"]] = 0;
+
+    //main alg
+    while (Q.length != 0) {
+      let min_node = this.getMinDistanceNode(Q);
+
+      //remove min node from openlist
+      Q.splice(Q.indexOf(min_node), 1);
+
+      //for output
+      this.order.push(min_node);
+      this.openListOrder.push(Q);
+
+      let neighbors = this.getNeighbors(min_node);
+
+      //each neighbor gets new distance calculated based off current node, and updated if its new
+      //path has a smaller (more optimized) distance from start
+      neighbors.forEach(element => {
+        let new_distance = this.getNodeDistance(min_node) + 1; // right now all the weights are 1
+        if (new_distance < this.getNodeDistance(element)) {
+          this.distance[element["col"]][element["row"]] = new_distance;
+          this.previous[element["col"]][element["row"]] = min_node;
         }
+      });
     }
 
-    //main function, returns grid
-    run()
-    {
-        //make Q into list of all nodes
-        const Q = [];
-        for(let x = 0; x < this.grid.length; x++){
-            for (let y = 0; y < this.grid[0].length; y++){
-                Q.push(this.grid[x][y]);
-            }
-        }
+    return this.distance;
+  }
 
-        this.distance[0][0] = 0;
-        
-        while(Q.length != 0){
-            let min_node = this.getMinDistanceNode(Q);
+  //returns node in Q with minimum current distance
+  getMinDistanceNode(Q) {
+    let min_distance = this.distance[this.startNode["col"]][
+      this.startNode["row"]
+    ];
+    let min_node = Q[0];
 
-            this.order.push(min_node);
+    Q.forEach(element => {
+      let distance_temp = this.distance[element["col"]][element["row"]];
+      if (distance_temp < min_distance) {
+        min_distance = distance_temp;
+        min_node = element;
+      }
+    });
 
-            Q.splice(Q.indexOf(min_node), 1);
-
-            let neighbors = this.getNeighbors(min_node);
-
-            neighbors.forEach(element => {
-                let new_distance = this.getNodeDistance(min_node) + 1; // right now all the weights are 1
-                if(new_distance < this.getNodeDistance(element)){
-                    this.distance[element['col']][element['row']] = new_distance;
-                    this.previous[element['col']][element['row']] = min_node;
-                }
-            });
-        }
-
-        return this.distance;
-    }
-
-    next(){
-        return this.order[this.order_index++];
-    }
-
-    //returns node in Q with minimum current distance
-    getMinDistanceNode(Q)
-    {
-        let min_distance = this.distance[0][0];
-        let min_node = Q[0];
-        
-        Q.forEach(element => {
-            let distance_temp = this.distance[element['col']][element['row']];
-            if(distance_temp < min_distance){
-                min_distance = distance_temp;
-                min_node = element;
-            }
-        });
-
-        return min_node
-    }
-
-    getNeighbors(node) // i hate this i feel like im losing brain cells
-    {
-        let neighbors = [];
-        
-        let x = node['col'];
-        let y = node['row'];
-        
-        let positions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-
-        positions.forEach(element => {
-            try{
-                neighbors.push(this.grid[x + element[0]][y + element[1]]);
-            }catch(error){};
-        });
-
-        neighbors = neighbors.filter(element => {
-            return element != undefined;
-        });
-
-        return neighbors;
-    }
-
-    //readonly
-    getNodeDistance(node){
-        return this.distance[node['col']][node['row']];
-    }
+    return min_node;
+  }
+  //readonly
+  getNodeDistance(node) {
+    return this.distance[node["col"]][node["row"]];
+  }
 }
