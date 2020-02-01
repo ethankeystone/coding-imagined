@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-export default class AboutUs {
+export default function AboutUs() {
     return (
             <div>
                 <NavBar></NavBar>
