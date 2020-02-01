@@ -4,12 +4,10 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Base from "./pages/Base/Base";
 import Explore from "./pages/Explore/Explore";
 import AboutUs from "./pages/AboutUs/AboutUs";
-import MoreStuff from "./pages/MoreStuff/MoreStuff";
-import EvenMoreStuff from "./pages/EvenMoreStuff/EvenMoreStuff";
 import Home from "./pages/Home/Home";
 import PathFindingVisualizerPage from "./pages/PathFindingVisualizer/PathFindingVisualizerPage";
 
-function App() {
+export default function App() {
     return (
             <div className="App">
                 <Base>
@@ -18,8 +16,6 @@ function App() {
                             <Route exact path="/" component={Home}/>
                             <Route path="/about" component={AboutUs}/>
                             <Route path="/explore" component={Explore}/>
-                            <Route path="/moreStuff" component={MoreStuff}/>
-                            <Route path="/EvenMoreStuff" component={EvenMoreStuff}/>
                             <Route path="/PathFindingVisualizer" component={PathFindingVisualizerPage}/>
                         </Switch>
                     </Router>
@@ -27,5 +23,3 @@ function App() {
             </div>
         );
 }
-
-export default App;

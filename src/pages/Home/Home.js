@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-export default class Home {
+export default function Home() {
 
     return (
             <div className="App">

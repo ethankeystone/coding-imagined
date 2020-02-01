@@ -3,7 +3,7 @@ import NavBar from "../Base/NavBar";
 import Block from "./Block";
 import "../../css/Explore.css";
 
-export default class Explore {
+export default function Explore() {
     return (
             <div>
                 <NavBar></NavBar>

@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../Base/NavBar.js";
 
-export default class Error {
+export default function Error() {
     return (
             <div>
                 <NavBar></NavBar>
