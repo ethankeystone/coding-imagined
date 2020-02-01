@@ -6,7 +6,7 @@ import "../../css/PathFindingVisualizer.css";
 export default class PathFindingVisualizer extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       isLoading: true,
       grid: null,

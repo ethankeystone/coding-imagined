@@ -7,7 +7,6 @@ function Explore() {
     return (
         <div>
             <NavBar></NavBar>
-
             <div className="blocks">
                 <Block
                     link="/PathFindingVisualizer"
