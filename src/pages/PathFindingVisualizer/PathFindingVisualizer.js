@@ -34,17 +34,7 @@ export default class PathFindingVisualizer extends Component {
                 } else if (i === endNode.col && j === endNode.row) {
                     nodeState = "end";
                 }
-                currentRow.push({
-                    col: i,
-                    row: j,
-                    id: id,
-                    state: nodeState,
-                    weightvalue: 0,
-                    isRendered: false
-                });
-                id++;
             }
-            grid.push(currentRow);
         }
         return (grid);
     }
