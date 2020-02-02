@@ -7,9 +7,6 @@ export default class Dijkstra extends Pathfinder {
     this.distance = new Array(this.height)
       .fill(10000)
       .map(() => new Array(this.width).fill(10000));
-    this.previous = new Array(this.height)
-      .fill([0, 0])
-      .map(() => new Array(this.width).fill([0, 0]));
 
     this.run();
 
@@ -34,7 +31,7 @@ export default class Dijkstra extends Pathfinder {
     while (Q.length != 0) {
       let min_node = this.getMinDistanceNode(Q);
 
-      if (min_node == this.endNode) return;
+      if (min_node == this.endNode) break;
       //remove min node from openlist
       Q.splice(Q.indexOf(min_node), 1);
 
@@ -54,6 +51,8 @@ export default class Dijkstra extends Pathfinder {
         }
       });
     }
+
+    this.backtrace();
 
     return this.distance;
   }

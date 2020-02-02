@@ -17,16 +17,6 @@ export default class AStar extends Pathfinder {
       .fill(10000)
       .map(() => new Array(this.width).fill(10000));
 
-    //stores traceback for each position in array tuple
-    this.previous = new Array(this.height)
-      .fill([0, 0])
-      .map(() => new Array(this.width).fill([0, 0]));
-
-    //not a part of the algorithm, stores order for use for u ethan bb
-    this.order = new Array(); // stores list of smallest nodes (current nodes)
-
-    this.orderIndex = -1; // index for current traceback reached with .next()
-
     this.run();
   }
 
@@ -45,6 +35,7 @@ export default class AStar extends Pathfinder {
 
       //check while conditional
       if (smallestNode == this.endNode) {
+        this.backtrace();
         return;
       }
 
@@ -72,6 +63,7 @@ export default class AStar extends Pathfinder {
         if (neighborNewGScore < this.gList[element["col"]][element["row"]]) {
           //update new g score
           this.gList[element["col"]][element["row"]] = neighborNewGScore;
+          this.previous[element.col][element.row] = smallestNode;
 
           //add neighbor to openList
           if (!this.Contains(this.openList, element)) {
@@ -80,6 +72,8 @@ export default class AStar extends Pathfinder {
         }
       });
     }
+
+
     //open set is empty but goal never reached
     return -1;
   }

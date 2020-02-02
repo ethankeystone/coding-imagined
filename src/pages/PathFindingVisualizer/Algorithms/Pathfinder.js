@@ -15,10 +15,27 @@ export default class Pathfinder {
     //stores an array of the openList array at every stage
     this.openListOrder = new Array();
 
+    //stores order of backtrace for actual pathfinding
+    this.pathOrder = new Array();
+
+    //stores traceback - all nodes parent nodes
+    this.previous = new Array(this.height)
+      .fill({})
+      .map(() => new Array(this.width).fill({}));
+
     //this.next() adds 1 before returning so this index
     //is negetive one for the first iteration to return
     //order [0]
     this.orderIndex = -1;
+  }
+
+  //backtraces when algorithm is done running
+  backtrace() {
+    let currentBacktraceNode = this.endNode;
+    while (currentBacktraceNode != this.startNode) {
+      this.pathOrder.push(currentBacktraceNode);
+      currentBacktraceNode = this.previous[currentBacktraceNode.col][currentBacktraceNode.row];
+    }
   }
 
   //i dont know
