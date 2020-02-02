@@ -44,8 +44,9 @@ export default class Pathfinder {
     //for loop so i can try catch w o using max and mins and such
     positions.forEach(element => {
       try {
-        neighbors.push(this.grid[x + element[0]][y + element[1]]);
-      } catch (error) {}
+        if (element.state != "wall")
+          neighbors.push(this.grid[x + element[0]][y + element[1]]);
+      } catch (error) { }
     });
 
     //idk why this happens :/
