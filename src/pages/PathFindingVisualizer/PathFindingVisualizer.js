@@ -3,6 +3,8 @@ import Node from "./Node";
 import update from 'immutability-helper';
 import "../../css/PathFindingVisualizer.css";
 import AStar from "./Algorithms/AStar"
+import Dijkstra from "./Algorithms/Dijkstra"
+import BreadthFirst from "./Algorithms/BreadthFirst"
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -14,7 +16,10 @@ export default class PathFindingVisualizer extends Component {
             mouseDown: false,
             currentSelection: "1",
             stopAnimation: false,
-            isRunningAnimation: false
+            isRunningAnimation: false,
+            algoSelection: "1",
+            startNode : {col: 7, row: 5},
+            endNode : {col: 7, row: 30}
         };
     }
 
@@ -25,16 +30,13 @@ export default class PathFindingVisualizer extends Component {
         var grid = [];
         var id = 0;
 
-        let startNode = {col: 7, row: 5};
-        let endNode = {col: 7, row: 30};
-
         for (let i = 0; i < width; i++) {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
                 let nodeState = "none"
-                if(i === startNode.col && j === startNode.row) {
+                if(i === this.state.startNode.col && j === this.state.startNode.row) {
                     nodeState = "start";
-                } else if (i === endNode.col && j === endNode.row) {
+                } else if (i === this.state.endNode.col && j === this.state.endNode.row) {
                     nodeState = "end";
                 }
                 let renderTime = j + i;
@@ -81,6 +83,15 @@ export default class PathFindingVisualizer extends Component {
 
 
     handleMouseDown(row, col) {
+        if (this.state.currentSelection === "3") {
+            this.state.grid[col][row].state = "start";
+            this.setState({grid: update(this.state.grid, {[this.state.startNode.col]: {[this.state.startNode.row]: {state: {$set: "none"}}}})});
+            this.state.startNode = {col: col, row: row};
+        } else if (this.state.currentSelection === "4") {
+            this.state.grid[col][row].state = "end";
+            this.setState({grid: update(this.state.grid, {[this.state.endNode.col]: {[this.state.endNode.row]: {state: {$set: "none"}}}})});
+            this.state.endNode = {col: col, row: row};
+        }
         this.addNode(row, col);
         this.setState({mouseDown: true});
     }
@@ -135,11 +146,18 @@ export default class PathFindingVisualizer extends Component {
 
     findPath() {
         if (this.state.grid != null && !this.state.isRunningAnimation) {
+            let algo = null;
+            if (this.state.algoSelection === "1") {
+                algo = new AStar(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
+            } else if (this.state.algoSelection === "2") {
+                algo = new Dijkstra(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
+            } else if (this.state.algoSelection === "3") {
+                algo = new BreadthFirst(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
+            }
+            
             if (this.state.isRunningAnimation) {
                 this.state.isRunningAnimation = false;
             }
-            let algo = new AStar(this.state.grid, this.state.grid[7][5], this.state.grid[7][30]);
-
             let output = algo.order;
             let count = 0;
             var stop = setInterval(
@@ -170,15 +188,18 @@ export default class PathFindingVisualizer extends Component {
                         <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
                         <button onClick={() => this.resetGrid()}> Reset Grid </button>
                         <button onClick={() => this.findPath()}> Find Path </button>
-                        <label htmlFor="Weight">Toggle Weights </label>
+                        <label htmlFor="Weight">Toggle Placement</label>
                         <select id = "Weight" onChange={(option)=>this.setState({currentSelection: option.target.value})}>
                                  <option value = "1">Wall</option>
                                  <option value = "2">Weights</option>
+                                 <option value = "3">Start Node</option>
+                                 <option value = "4">End Node</option>
                         </select>
                         <label id="Algo"> Select Algorithm </label>
-                        <select id="Algo">
-                            <option value = "1"> Dijkstra's </option>
-                            <option value = "2"> Some other one </option>
+                        <select id="Algo" nChange={(option)=>this.setState({algoSelection: option.target.value})}>
+                            <option value = "1"> A-Star </option>
+                            <option value = "2"> Dijkstra's </option>
+                            <option value = "3"> BreadthFirst </option>
                         </select>
                         <div>
                         {grid.map(row => {

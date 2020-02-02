@@ -45,10 +45,14 @@
 }
 .start {
     background-color: orange;
+    animation-name: startAnimation;
+    animation-duration: .7s;
 }
 
 .end {
     background-color: purple;
+    animation-name: endAnimation;
+    animation-duration: .7s;
 }
 
 .wall {
@@ -88,4 +92,19 @@
     50% {background-color: rgb(6, 139, 138, 0.205); transform: scale(.75);}
     75% {background-color: rgba(32, 32, 32, 0.205); transform: scale(1.2);}
     100% {background-color: rgba(0, 0, 0, 0.205); transform: scale(1);}
+}
+
+
+@keyframes startAnimation {
+    25% {background-color: rgb(235, 193, 174); transform: scale(.25);}
+    50% {background-color: rgb(209, 231, 83); transform: scale(.75);}
+    75% {background-color: rgb(196, 121, 36); transform: scale(1.2);}
+    100% {background-color: orange; transform: scale(1);}
+}
+
+@keyframes endAnimation {
+    25% {background-color: rgb(231, 171, 243); transform: scale(.25);}
+    50% {background-color: rgb(163, 53, 206); transform: scale(.75);}
+    75% {background-color: rgb(174, 22, 245); transform: scale(1.2);}
+    100% {background-color: purple; transform: scale(1);}
 }
