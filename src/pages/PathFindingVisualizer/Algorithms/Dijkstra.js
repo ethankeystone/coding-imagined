@@ -29,12 +29,12 @@ export default class Dijkstra extends Pathfinder {
     }
 
     //set distance of start node to smallest value, 0
-    this.distance[this.startNode["col"]][this.startNode["end"]] = 0;
-
+    this.distance[this.startNode["col"]][this.startNode["row"]] = 0;
     //main alg
     while (Q.length != 0) {
       let min_node = this.getMinDistanceNode(Q);
 
+      if (min_node == this.endNode) return;
       //remove min node from openlist
       Q.splice(Q.indexOf(min_node), 1);
 
@@ -60,14 +60,12 @@ export default class Dijkstra extends Pathfinder {
 
   //returns node in Q with minimum current distance
   getMinDistanceNode(Q) {
-    let min_distance = this.distance[this.startNode["col"]][
-      this.startNode["row"]
-    ];
+    let min_distance = 100000;
     let min_node = Q[0];
 
     Q.forEach(element => {
       let distance_temp = this.distance[element["col"]][element["row"]];
-      if (distance_temp < min_distance) {
+      if (distance_temp < min_distance && element.state != "wall") {
         min_distance = distance_temp;
         min_node = element;
       }

@@ -59,6 +59,7 @@ export default class AStar extends Pathfinder {
       let neighbors = this.getNeighbors(smallestNode);
 
       neighbors.forEach(element => {
+        if (element.state === "wall") return;
         //set distance from end node
         this.hList[element["col"]][element["row"]] = this.getDistance(element);
         //get current and score after travel

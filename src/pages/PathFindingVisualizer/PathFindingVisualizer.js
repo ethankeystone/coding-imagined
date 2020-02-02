@@ -1,10 +1,11 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import Node from "./Node";
 import update from 'immutability-helper';
 import "../../css/PathFindingVisualizer.css";
 import AStar from "./Algorithms/AStar"
 import Dijkstra from "./Algorithms/Dijkstra"
 import BreadthFirst from "./Algorithms/BreadthFirst"
+import { scryRenderedDOMComponentsWithTag } from "react-dom/test-utils";
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -18,9 +19,9 @@ export default class PathFindingVisualizer extends Component {
             stopAnimation: false,
             isRunningAnimation: false,
             algoSelection: "1",
-            startNode : {col: 7, row: 5},
-            endNode : {col: 7, row: 30},
-            weight: 0
+            startNode: { col: 7, row: 5 },
+            endNode: { col: 7, row: 30 },
+            mouseOverNode: null
         };
     }
 
@@ -35,7 +36,7 @@ export default class PathFindingVisualizer extends Component {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
                 let nodeState = "none"
-                if(i === this.state.startNode.col && j === this.state.startNode.row) {
+                if (i === this.state.startNode.col && j === this.state.startNode.row) {
                     nodeState = "start";
                 } else if (i === this.state.endNode.col && j === this.state.endNode.row) {
                     nodeState = "end";
@@ -64,41 +65,46 @@ export default class PathFindingVisualizer extends Component {
 
 
     addNode(row, col) {
-        if(this.state.mouseDown) {
-            if(this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
-                this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "none"}}}})});
-            } else if(this.state.grid[col][row].state === "end") {
+        if (this.state.mouseDown) {
+            if (this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
+                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
+            } else if (this.state.grid[col][row].state === "end") {
 
-            } else if(this.state.grid[col][row].state === "start") {
+            } else if (this.state.grid[col][row].state === "start") {
 
             } else {
-                if(this.state.currentSelection === "1") {
-                    this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "wall"}}}})});
-                } else if(this.state.currentSelection === "2") {
-                    this.setState({grid: update(this.state.grid, {[col]: {[row]: {state: {$set: "weight"}}}})});
+                if (this.state.currentSelection === "1") {
+                    this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+                } else if (this.state.currentSelection === "2") {
+                    this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "weight" } } } }) });
                 }
             }
         }
     }
 
 
+    handleMouseDown(node) {
+        let col = node.col;
+        let row = node.row;
 
-    handleMouseDown(row, col) {
+        if (this.state.mouseDown == false) return;
+
+        if (this.state.currentSelection === "1") {
+            this.state.grid[col][row].state = "wall";
+        }
         if (this.state.currentSelection === "3") {
             this.state.grid[col][row].state = "start";
-            this.setState({grid: update(this.state.grid, {[this.state.startNode.col]: {[this.state.startNode.row]: {state: {$set: "none"}}}})});
-            this.state.startNode = {col: col, row: row};
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { set: "wall" } } } }) });
+            this.state.startNode = { col: col, row: row };
         } else if (this.state.currentSelection === "4") {
             this.state.grid[col][row].state = "end";
-            this.setState({grid: update(this.state.grid, {[this.state.endNode.col]: {[this.state.endNode.row]: {state: {$set: "none"}}}})});
-            this.state.endNode = {col: col, row: row};
+            this.state.endNode = { col: col, row: row };
         }
-        this.addNode(row, col);
-        this.setState({mouseDown: true});
     }
 
     handleMouseUp() {
-        this.setState({mouseDown: false});
+        console.log("hello");
+        //this.setState({ mouseDown: false });
     }
 
     resetGrid() {
@@ -122,7 +128,7 @@ export default class PathFindingVisualizer extends Component {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
                 let nodeState = "expand"
-                if(i === startNode.col && j === startNode.row) {
+                if (i === startNode.col && j === startNode.row) {
                     nodeState = "start";
                 } else if (i === endNode.col && j === endNode.row) {
                     nodeState = "end";
@@ -139,7 +145,7 @@ export default class PathFindingVisualizer extends Component {
                 id++;
             }
             grid.push(currentRow);
-            }
+        }
         this.setState({
             isLoading: false,
             grid: grid
@@ -156,7 +162,7 @@ export default class PathFindingVisualizer extends Component {
             } else if (this.state.algoSelection === "3") {
                 algo = new BreadthFirst(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
             }
-            
+            //redundant get rid of this if you dont need it ethan
             if (this.state.isRunningAnimation) {
                 this.state.isRunningAnimation = false;
             }
@@ -200,31 +206,32 @@ export default class PathFindingVisualizer extends Component {
         this.state.isRunningAnimation = false;
         }
     }
-    
+
     render() {
+        this.mouseDown = false;
         if (this.state.isLoading) {
             return <div></div>;
         } else {
             let grid = this.state.grid;
             return (
-                    <div className="center">
-                        <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
-                        <button onClick={() => this.resetGrid()}> Reset Grid </button>
-                        <button onClick={() => this.findPath()}> Find Path </button>
-                        <label htmlFor="Weight">Toggle Placement</label>
-                        <select id = "Weight" onChange={(option)=>this.setState({currentSelection: option.target.value})}>
-                                 <option value = "1">Wall</option>
-                                 <option value = "2">Weights</option>
-                                 <option value = "3">Start Node</option>
-                                 <option value = "4">End Node</option>
-                        </select>
-                        <label id="Algo"> Select Algorithm </label>
-                        <select id="Algo" nChange={(option)=>this.setState({algoSelection: option.target.value})}>
-                            <option value = "1"> A-Star </option>
-                            <option value = "2"> Dijkstra's </option>
-                            <option value = "3"> BreadthFirst </option>
-                        </select>
-                        <div>
+                <div className="center">
+                    <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
+                    <button onClick={() => this.resetGrid()}> Reset Grid </button>
+                    <button onClick={() => this.findPath()}> Find Path </button>
+                    <label htmlFor="Weight">Toggle Placement</label>
+                    <select id="Weight" onChange={(option) => console.log(this.state.grid)/*this.setState({ currentSelection: option.target.value })}*/}>
+                        <option value="1">Wall</option>
+                        <option value="2">Weights</option>
+                        <option value="3">Start Node</option>
+                        <option value="4">End Node</option>
+                    </select>
+                    <label id="Algo"> Select Algorithm </label>
+                    <select id="Algo" onChange={(option) => this.setState({ algoSelection: option.target.value })}>
+                        <option value="1"> A-Star </option>
+                        <option value="2"> Dijkstra's </option>
+                        <option value="3"> BreadthFirst </option>
+                    </select>
+                    <div onMouseDown={() => this.state.mouseDown = true} onMouseUp={() => this.state.mouseDown = false}>
                         {grid.map(row => {
                             return (
                                 <div key={row[0].col} className="row">
@@ -234,19 +241,20 @@ export default class PathFindingVisualizer extends Component {
                                             row={node.row}
                                             key={node.id}
                                             renderTime={node.renderTime}
-                                            addNode={(row, col) => this.addNode(node.row, node.col)}
-                                            handleMouseDown={(row, col) => this.handleMouseDown(node.row, node.col)}
-                                            handleMouseUp={() => this.handleMouseUp()}
-                                            state= {node.state}
+                                            addNode={() => this.addNode(node.row, node.col)}
+                                            //handleMouseDown={() => this.handleMouseDown(node.col, node.row)}
+                                            handleMouseOver={() => this.handleMouseDown(node)}
+                                            //handleMouseUp={() => console.log("hihi")}
+                                            state={node.state}
                                             isRendered={false}
-                                            ></Node>;
+                                        ></Node>;
                                     })}
                                 </div>
                             );
                         })}
-                        </div>
                     </div>
-                );
+                </div >
+            );
         }
     }
 }

@@ -9,6 +9,10 @@
     animation-duration: .7s;
 }
 
+.nodeRendered:hover{
+    background-color:tan;
+}
+
 .nodeNotRendered {
     width: 35px;
     height: 35px;
@@ -26,12 +30,12 @@
 }
 
 
-.nodeEmpty {
+.nodeEmpty{
 
 }
 
 .node:hover {
-
+    background-color:tan;
 }
 
 .expand:hover {

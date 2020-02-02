@@ -21,11 +21,11 @@ export default class Node extends Component {
         });
 
         setTimeout(
-                function() {
-                    this.setState({isRendered: true})
-                }.bind(this),
-                this.props.renderTime * 5
-            );
+            function () {
+                this.setState({ isRendered: true })
+            }.bind(this),
+            this.props.renderTime * 5
+        );
     }
 
     render() {
@@ -35,24 +35,26 @@ export default class Node extends Component {
             addNode,
             state,
             handleMouseUp,
-            handleMouseDown
+            handleMouseDown,
+            handleMouseOver
         } = this.props;
 
-        if(this.state.isLoading === true) {
+        if (this.state.isLoading === true) {
             return (
-                    <div className={"node "}>
-                        Yikes
+                <div className={"node "}>
+                    Yikes
                     </div>
-                );
+            );
         } else {
             return (
-                    <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
-                            onMouseDown={() => {handleMouseDown()}}
-                            onMouseEnter={() => addNode(col, row)}
-                            onMouseUp={() => handleMouseUp(col, row)}
-                        >
-                    </div>
-                );
+                <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                    onMouseEnter={() => handleMouseOver()}
+                    //onMouseDown={() => { handleMouseDown() }}
+                    onMouseEnter={() => addNode(col, row)}
+                //onMouseUp={() => handleMouseUp()}
+                >
+                </div>
+            );
         }
     }
 }
