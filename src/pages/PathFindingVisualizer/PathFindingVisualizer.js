@@ -81,7 +81,6 @@ export default class PathFindingVisualizer extends Component {
 
 
     handleMouseDown(row, col) {
-        console.log(this.state.mouseDown);
         if (this.state.mouseDown == false) return;
 
         if (this.state.currentSelection === "1") {
@@ -99,7 +98,6 @@ export default class PathFindingVisualizer extends Component {
     }
 
     handleMouseUp() {
-        console.log("hello");
         //this.setState({ mouseDown: false });
     }
 
@@ -167,33 +165,25 @@ export default class PathFindingVisualizer extends Component {
             let outer = algo.openList;
             let amountPerIt = Math.round(outer.length / output.length);
 
+            let finalPath = algo.pathOrder;
+            let finalPathCount = algo.pathOrder.length - 1;
+
             let count = 0;
             let secondCount = 0;
             var stop = setInterval(
                     function(y) {
                         y = count;
-                        let lastIt = false;
-                        if (y > output.length - 2) {
-                            lastIt = true;
-                            clearInterval(stop);
-                        } 
-                        // if(!lastIt) {
-                        //     if(secondCount < outer.length) {
-                        //         for (let i = 0; i < amountPerIt; i++) {
-                        //             this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
-                        //             secondCount++;
-                        //         }
-                        //     }
-                        // } else {
-                        //     for (let i = secondCount; i < outer.length; i++) {
-                        //         this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
-                        //         secondCount++;
-                        //     }
-                        // }
-                       
-                        //this.state.grid[output[y].col][output[y].row].weight = output[y].id;
-                        this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
-                        count++;
+                        if (y >= output.length) {
+                            if (finalPathCount >= 0) {
+                                this.setState({grid: update(this.state.grid, {[finalPath[finalPathCount].col]: {[finalPath[finalPathCount].row]: {state: {$set: "secondaryExpand"}}}})});
+                                finalPathCount--;
+                           } else {
+                               clearInterval(stop);
+                           }
+                        } else {
+                            this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
+                            count++;
+                        }
                         
                     }.bind(this), 
                     count * 200, count

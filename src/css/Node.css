@@ -73,16 +73,16 @@
 }
 
 .secondaryExpand {
-    background-color: lightgreen;
+    background-color: gold;
     animation-name: secondaryExpandAnimation;
     animation-duration: .7s;
 }
 
 @keyframes secondaryExpandAnimation {
-    25% {background-color: rgb(246, 252, 249); transform: scale(.25);}
-    50% {background-color: rgb(221, 243, 239); transform: scale(.75);}
-    75% {background-color: rgb(134, 223, 107); transform: scale(1.2);}
-    100% {background-color: #3cdf37; transform: scale(1);}
+    25% {background-color: rgb(242, 247, 170); transform: scale(.25);}
+    50% {background-color: rgb(182, 204, 58); transform: scale(.75);}
+    75% {background-color: rgb(176, 179, 19); transform: scale(1.2);}
+    100% {background-color: #ffd900; transform: scale(1);}
 }
 
 @keyframes weightAnimation {
