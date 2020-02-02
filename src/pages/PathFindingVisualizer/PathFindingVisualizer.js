@@ -149,10 +149,13 @@ export default class PathFindingVisualizer extends Component {
     findPath() {
         if (this.state.grid != null && !this.state.isRunningAnimation) {
             let algo = null;
+            let timeInterval = 0;
             if (this.state.algoSelection === "1") {
                 algo = new AStar(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
+                timeInterval = 200;
             } else if (this.state.algoSelection === "2") {
                 algo = new Dijkstra(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
+                timeInterval = 50;
             } else if (this.state.algoSelection === "3") {
                 algo = new BreadthFirst(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
             }
@@ -162,9 +165,6 @@ export default class PathFindingVisualizer extends Component {
             }
 
             let output = algo.order;
-            let outer = algo.openList;
-            let amountPerIt = Math.round(outer.length / output.length);
-
             let finalPath = algo.pathOrder;
             let finalPathCount = algo.pathOrder.length - 1;
 
@@ -186,7 +186,7 @@ export default class PathFindingVisualizer extends Component {
                         }
                         
                     }.bind(this), 
-                    count * 200, count
+                    count * timeInterval, count
                 );
         this.state.isRunningAnimation = false;
         }
