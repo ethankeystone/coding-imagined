@@ -177,19 +177,19 @@ export default class PathFindingVisualizer extends Component {
                             lastIt = true;
                             clearInterval(stop);
                         } 
-                        if(!lastIt) {
-                            if(secondCount < outer.length) {
-                                for (let i = 0; i < amountPerIt; i++) {
-                                    this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
-                                    secondCount++;
-                                }
-                            }
-                        } else {
-                            for (let i = secondCount; i < outer.length; i++) {
-                                this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
-                                secondCount++;
-                            }
-                        }
+                        // if(!lastIt) {
+                        //     if(secondCount < outer.length) {
+                        //         for (let i = 0; i < amountPerIt; i++) {
+                        //             this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
+                        //             secondCount++;
+                        //         }
+                        //     }
+                        // } else {
+                        //     for (let i = secondCount; i < outer.length; i++) {
+                        //         this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
+                        //         secondCount++;
+                        //     }
+                        // }
                        
                         //this.state.grid[output[y].col][output[y].row].weight = output[y].id;
                         this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
