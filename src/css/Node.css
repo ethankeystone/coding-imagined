@@ -7,10 +7,11 @@
     margin: 0;
     animation-name: nodeCreation;
     animation-duration: .7s;
+    color: black;
 }
 
 .nodeRendered:hover{
-    background-color:tan;
+    background-color:grey;
 }
 
 .nodeNotRendered {

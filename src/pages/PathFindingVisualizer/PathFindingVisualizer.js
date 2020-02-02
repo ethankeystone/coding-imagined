@@ -65,39 +65,35 @@ export default class PathFindingVisualizer extends Component {
 
 
     addNode(row, col) {
-        if (this.state.mouseDown) {
-            if (this.state.grid[col][row].state === "wall" || this.state.grid[col][row].state === "weight") {
-                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
-            } else if (this.state.grid[col][row].state === "end") {
-
-            } else if (this.state.grid[col][row].state === "start") {
-
-            } else {
-                if (this.state.currentSelection === "1") {
-                    this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
-                } else if (this.state.currentSelection === "2") {
-                    this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "weight" } } } }) });
-                }
-            }
+        if (this.state.currentSelection === "1") {
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+        }   
+        else if (this.state.currentSelection === "3") {
+            this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "start" } } } }) });
+            this.state.startNode = { col: col, row: row };
+        } else if (this.state.currentSelection === "4") {
+            this.state.grid[this.state.endNode.col][this.state.endNode.row].state = "end";
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "end" } } } }) });
+            this.state.endNode = { col: col, row: row };
         }
     }
 
 
-    handleMouseDown(node) {
-        let col = node.col;
-        let row = node.row;
-
+    handleMouseDown(row, col) {
+        console.log(this.state.mouseDown);
         if (this.state.mouseDown == false) return;
 
         if (this.state.currentSelection === "1") {
-            this.state.grid[col][row].state = "wall";
-        }
-        if (this.state.currentSelection === "3") {
-            this.state.grid[col][row].state = "start";
-            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { set: "wall" } } } }) });
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+        }   
+        else if (this.state.currentSelection === "3") {
+            this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "start" } } } }) });
             this.state.startNode = { col: col, row: row };
         } else if (this.state.currentSelection === "4") {
-            this.state.grid[col][row].state = "end";
+            this.state.grid[this.state.endNode.col][this.state.endNode.row].state = "end";
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "end" } } } }) });
             this.state.endNode = { col: col, row: row };
         }
     }
@@ -169,7 +165,6 @@ export default class PathFindingVisualizer extends Component {
 
             let output = algo.order;
             let outer = algo.openList;
-            console.log(outer);
             let amountPerIt = Math.round(outer.length / output.length);
 
             let count = 0;
@@ -191,12 +186,12 @@ export default class PathFindingVisualizer extends Component {
                             }
                         } else {
                             for (let i = secondCount; i < outer.length; i++) {
-                                console.log(secondCount)
                                 this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
                                 secondCount++;
                             }
                         }
-                        this.state.grid[output[y].col][output[y].row].
+                       
+                        //this.state.grid[output[y].col][output[y].row].weight = output[y].id;
                         this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
                         count++;
                         
@@ -219,7 +214,7 @@ export default class PathFindingVisualizer extends Component {
                     <button onClick={() => this.resetGrid()}> Reset Grid </button>
                     <button onClick={() => this.findPath()}> Find Path </button>
                     <label htmlFor="Weight">Toggle Placement</label>
-                    <select id="Weight" onChange={(option) => console.log(this.state.grid)/*this.setState({ currentSelection: option.target.value })}*/}>
+                    <select id="Weight" onChange={(option) => this.setState({ currentSelection: option.target.value })}>
                         <option value="1">Wall</option>
                         <option value="2">Weights</option>
                         <option value="3">Start Node</option>
@@ -242,11 +237,12 @@ export default class PathFindingVisualizer extends Component {
                                             key={node.id}
                                             renderTime={node.renderTime}
                                             addNode={() => this.addNode(node.row, node.col)}
-                                            //handleMouseDown={() => this.handleMouseDown(node.col, node.row)}
-                                            handleMouseOver={() => this.handleMouseDown(node)}
+                                            handleMouseDown={() => this.addNode(node.row, node.col)}
+                                            handleMouseOver={() => this.handleMouseDown(node.row, node.col)}
                                             //handleMouseUp={() => console.log("hihi")}
                                             state={node.state}
                                             isRendered={false}
+                                            weight={node.weight}
                                         ></Node>;
                                     })}
                                 </div>
