@@ -19,7 +19,8 @@ export default class PathFindingVisualizer extends Component {
             isRunningAnimation: false,
             algoSelection: "1",
             startNode : {col: 7, row: 5},
-            endNode : {col: 7, row: 30}
+            endNode : {col: 7, row: 30},
+            weight: 0
         };
     }
 
@@ -45,9 +46,9 @@ export default class PathFindingVisualizer extends Component {
                     row: j,
                     state: nodeState,
                     id: id,
-                    weightvalue: 0,
                     isRendered: false,
-                    renderTime: renderTime
+                    renderTime: renderTime,
+                    weight: -1
                 });
                 id++;
             }
@@ -114,8 +115,8 @@ export default class PathFindingVisualizer extends Component {
         var grid = [];
         var id = 0;
 
-        let startNode = {col: 7, row: 5};
-        let endNode = {col: 7, row: 30};
+        let startNode = this.state.startNode;
+        let endNode = this.state.endNode;
 
         for (let i = 0; i < width; i++) {
             const currentRow = [];
@@ -132,7 +133,8 @@ export default class PathFindingVisualizer extends Component {
                     id: id,
                     state: nodeState,
                     weightvalue: 0,
-                    isRendered: false
+                    isRendered: false,
+                    weight: -1
                 });
                 id++;
             }
@@ -158,23 +160,44 @@ export default class PathFindingVisualizer extends Component {
             if (this.state.isRunningAnimation) {
                 this.state.isRunningAnimation = false;
             }
+
             let output = algo.order;
+            let outer = algo.openList;
+            console.log(outer);
+            let amountPerIt = Math.round(outer.length / output.length);
+
             let count = 0;
+            let secondCount = 0;
             var stop = setInterval(
                     function(y) {
                         y = count;
-                        if (y > output.length - 1) {
-                            console.log("stop");
+                        let lastIt = false;
+                        if (y > output.length - 2) {
+                            lastIt = true;
                             clearInterval(stop);
+                        } 
+                        if(!lastIt) {
+                            if(secondCount < outer.length) {
+                                for (let i = 0; i < amountPerIt; i++) {
+                                    this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
+                                    secondCount++;
+                                }
+                            }
                         } else {
-                            console.log(y);
-                            this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
-                            count++;
+                            for (let i = secondCount; i < outer.length; i++) {
+                                console.log(secondCount)
+                                this.setState({grid: update(this.state.grid, {[outer[secondCount].col]: {[outer[secondCount].row]: {state: {$set: "secondaryExpand"}}}})});
+                                secondCount++;
+                            }
                         }
-                    }.bind(this),
+                        this.state.grid[output[y].col][output[y].row].
+                        this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
+                        count++;
+                        
+                    }.bind(this), 
                     count * 200, count
                 );
-            this.state.isRunningAnimation = false;
+        this.state.isRunningAnimation = false;
         }
     }
     
