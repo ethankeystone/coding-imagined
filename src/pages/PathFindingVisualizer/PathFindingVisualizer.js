@@ -91,7 +91,7 @@ export default class PathFindingVisualizer extends Component {
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "start" } } } }) });
             this.state.startNode = { col: col, row: row };
         } else if (this.state.currentSelection === "4") {
-            this.state.grid[this.state.endNode.col][this.state.endNode.row].state = "end";
+            this.state.grid[this.state.endNode.col][this.state.endNode.row].state = "none";
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "end" } } } }) });
             this.state.endNode = { col: col, row: row };
         }
