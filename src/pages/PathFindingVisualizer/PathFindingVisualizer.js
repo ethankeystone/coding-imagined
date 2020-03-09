@@ -21,7 +21,8 @@ export default class PathFindingVisualizer extends Component {
             algoSelection: "1",
             startNode: { col: 7, row: 5 },
             endNode: { col: 7, row: 30 },
-            mouseOverNode: null
+            mouseOverNode: null,
+            stop: 0
         };
     }
 
@@ -66,7 +67,11 @@ export default class PathFindingVisualizer extends Component {
 
     addNode(row, col) {
         if (this.state.currentSelection === "1") {
-            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+            if (this.state.grid[col][row].state == "wall") {
+                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
+            } else if(this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
+                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+            } 
         }   
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
@@ -84,7 +89,11 @@ export default class PathFindingVisualizer extends Component {
         if (this.state.mouseDown == false) return;
 
         if (this.state.currentSelection === "1") {
-            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+            if (this.state.grid[col][row].state == "wall") {
+                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
+            } else if(this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
+                this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
+            } 
         }   
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
@@ -102,6 +111,7 @@ export default class PathFindingVisualizer extends Component {
     }
 
     resetGrid() {
+        clearInterval(this.state.stop);
         this.state.stopAnimation = true;
         this.setState({
             isLoading: false,
@@ -121,7 +131,12 @@ export default class PathFindingVisualizer extends Component {
         for (let i = 0; i < width; i++) {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
-                let nodeState = "expand"
+                let randomNumber = Math.random() * 100;
+                let nodeState = "none";
+                if (randomNumber < 30) {
+                    nodeState = "wall";
+                }
+
                 if (i === startNode.col && j === startNode.row) {
                     nodeState = "start";
                 } else if (i === endNode.col && j === endNode.row) {
@@ -170,7 +185,7 @@ export default class PathFindingVisualizer extends Component {
 
             let count = 0;
             let secondCount = 0;
-            var stop = setInterval(
+            this.state.stop = setInterval(
                     function(y) {
                         y = count;
                         if (y >= output.length) {
@@ -178,7 +193,7 @@ export default class PathFindingVisualizer extends Component {
                                 this.setState({grid: update(this.state.grid, {[finalPath[finalPathCount].col]: {[finalPath[finalPathCount].row]: {state: {$set: "secondaryExpand"}}}})});
                                 finalPathCount--;
                            } else {
-                               clearInterval(stop);
+                               clearInterval(this.state.stop);
                            }
                         } else {
                             this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
@@ -216,7 +231,7 @@ export default class PathFindingVisualizer extends Component {
                         <option value="2"> Dijkstra's </option>
                         <option value="3"> BreadthFirst </option>
                     </select>
-                    <div onMouseDown={() => this.state.mouseDown = true} onMouseUp={() => this.state.mouseDown = false}>
+                    <div class="centerGrid" onMouseDown={() => this.state.mouseDown = true} onMouseUp={() => this.state.mouseDown = false}>
                         {grid.map(row => {
                             return (
                                 <div key={row[0].col} className="row">
