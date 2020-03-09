@@ -1,10 +1,17 @@
 .center {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 20px;
     width: 100%;
     font-family: "Courier New";
     color: green;
 }
+
+.centerGrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .row {
     margin-left: 10px;
     margin-right: 10px;
@@ -12,6 +19,7 @@
     font-size: 0;
     display: flex;
     flex-flow: row nowrap;
+    justify-content: center;
 }
 
 button {
@@ -37,4 +45,8 @@ option {
 select {
     font-family: "Courier New";
     color: #026917;
+}
+
+.row {
+    align-content: center;
 }

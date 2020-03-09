@@ -1,13 +1,11 @@
 import React from "react";
-import NavBar from "../Base/NavBar.js";
+import "../../css/App.css";
+import PathFindingVisualizer from "../PathFindingVisualizer/PathFindingVisualizer";
 
-export default function Home() {
-
+export default function App() {
     return (
             <div className="App">
-                <NavBar></NavBar>
-                <div>This is the home page</div>
+                <PathFindingVisualizer></PathFindingVisualizer>
             </div>
         );
-
 }
