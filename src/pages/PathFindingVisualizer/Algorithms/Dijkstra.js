@@ -44,7 +44,7 @@ export default class Dijkstra extends Pathfinder {
       //each neighbor gets new distance calculated based off current node, and updated if its new
       //path has a smaller (more optimized) distance from start
       neighbors.forEach(element => {
-        let new_distance = this.getNodeDistance(min_node) + 1; // right now all the weights are 1
+        let new_distance = this.getNodeDistance(min_node) + element['weight']; // right now all the weights are 1
         if (new_distance < this.getNodeDistance(element)) {
           this.distance[element["col"]][element["row"]] = new_distance;
           this.previous[element["col"]][element["row"]] = min_node;

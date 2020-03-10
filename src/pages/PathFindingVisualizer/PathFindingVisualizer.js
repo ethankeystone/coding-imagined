@@ -50,7 +50,7 @@ export default class PathFindingVisualizer extends Component {
                     id: id,
                     isRendered: false,
                     renderTime: renderTime,
-                    weight: -1
+                    weight: 1
                 });
                 id++;
             }
@@ -69,10 +69,13 @@ export default class PathFindingVisualizer extends Component {
         if (this.state.currentSelection === "1") {
             if (this.state.grid[col][row].state == "wall") {
                 this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
-            } else if(this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
+            } else if (this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
                 this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
-            } 
-        }   
+            }
+        }
+        else if (this.state.currentSelection === "2") { // add weight
+            this.state.grid[col][row].weight += 1;
+        }
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "start" } } } }) });
@@ -91,10 +94,14 @@ export default class PathFindingVisualizer extends Component {
         if (this.state.currentSelection === "1") {
             if (this.state.grid[col][row].state == "wall") {
                 this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
-            } else if(this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
+            } else if (this.state.grid[col][row].state != "start" && this.state.grid[col][row].state != "end") {
                 this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "wall" } } } }) });
-            } 
-        }   
+            }
+        }
+        else if (this.state.currentSelection === "2") { // add weight
+            this.state.grid[col][row].weight += 1;
+            console.log(this.state.grid[col][row].weight);
+        }
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "start" } } } }) });
@@ -186,24 +193,24 @@ export default class PathFindingVisualizer extends Component {
             let count = 0;
             let secondCount = 0;
             this.state.stop = setInterval(
-                    function(y) {
-                        y = count;
-                        if (y >= output.length) {
-                            if (finalPathCount >= 0) {
-                                this.setState({grid: update(this.state.grid, {[finalPath[finalPathCount].col]: {[finalPath[finalPathCount].row]: {state: {$set: "secondaryExpand"}}}})});
-                                finalPathCount--;
-                           } else {
-                               clearInterval(this.state.stop);
-                           }
+                function (y) {
+                    y = count;
+                    if (y >= output.length) {
+                        if (finalPathCount >= 0) {
+                            this.setState({ grid: update(this.state.grid, { [finalPath[finalPathCount].col]: { [finalPath[finalPathCount].row]: { state: { $set: "secondaryExpand" } } } }) });
+                            finalPathCount--;
                         } else {
-                            this.setState({grid: update(this.state.grid, {[output[y].col]: {[output[y].row]: {state: {$set: "expand"}}}})});
-                            count++;
+                            clearInterval(this.state.stop);
                         }
-                        
-                    }.bind(this), 
-                    count * timeInterval, count
-                );
-        this.state.isRunningAnimation = false;
+                    } else {
+                        this.setState({ grid: update(this.state.grid, { [output[y].col]: { [output[y].row]: { state: { $set: "expand" } } } }) });
+                        count++;
+                    }
+
+                }.bind(this),
+                count * timeInterval, count
+            );
+            this.state.isRunningAnimation = false;
         }
     }
 

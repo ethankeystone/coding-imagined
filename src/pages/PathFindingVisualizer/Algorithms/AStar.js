@@ -57,7 +57,7 @@ export default class AStar extends Pathfinder {
         let smallestNodeGScore = this.gList[smallestNode["col"]][
           smallestNode["row"]
         ];
-        let neighborNewGScore = smallestNodeGScore + 5; //weight as 5 for now
+        let neighborNewGScore = smallestNodeGScore + element['weight'];
 
         //if path is better than any previous
         if (neighborNewGScore < this.gList[element["col"]][element["row"]]) {
