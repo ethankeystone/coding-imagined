@@ -66,12 +66,23 @@
     animation-duration: .7s;
 }
 
-.weight {
-    background-color: red;
+.weighted2 {
+    background-color: rgb(221, 60, 68);
     animation-name: weightAnimation;
     animation-duration: .7s;
 }
 
+.weighted3{
+    background-color: rgb(200, 60, 68);
+}
+
+.weighted4{
+    background-color: rgb(167, 24, 36);
+}
+
+.weighted5{
+    background-color: rgb(121, 22, 31);
+}
 .secondaryExpand {
     background-color: gold;
     animation-name: secondaryExpandAnimation;

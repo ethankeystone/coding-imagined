@@ -50,7 +50,8 @@ export default class PathFindingVisualizer extends Component {
                     id: id,
                     isRendered: false,
                     renderTime: renderTime,
-                    weight: 1
+                    weight: 1,
+                    opacity: 0
                 });
                 id++;
             }
@@ -75,6 +76,7 @@ export default class PathFindingVisualizer extends Component {
         }
         else if (this.state.currentSelection === "2") { // add weight
             this.state.grid[col][row].weight += 1;
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "weighted" + String(Math.min(this.state.grid[col][row].weight, 5)) } } } }) });
         }
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
@@ -100,7 +102,8 @@ export default class PathFindingVisualizer extends Component {
         }
         else if (this.state.currentSelection === "2") { // add weight
             this.state.grid[col][row].weight += 1;
-            console.log(this.state.grid[col][row].weight);
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "weighted" + String(Math.min(this.state.grid[col][row].weight, 5)) } } } }) });
+            console.log(this.state.grid[col][row].state);
         }
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";

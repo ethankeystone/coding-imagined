@@ -37,7 +37,8 @@ export default class Node extends Component {
             handleMouseUp,
             handleMouseDown,
             handleMouseOver,
-            weight
+            weight,
+            opacity
         } = this.props;
 
         if (this.state.isLoading === true) {
