@@ -6,6 +6,7 @@ import AStar from "./Algorithms/AStar"
 import Dijkstra from "./Algorithms/Dijkstra"
 import BreadthFirst from "./Algorithms/BreadthFirst"
 import { scryRenderedDOMComponentsWithTag } from "react-dom/test-utils";
+import { any } from "prop-types";
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ export default class PathFindingVisualizer extends Component {
             startNode: { col: 7, row: 5 },
             endNode: { col: 7, row: 30 },
             mouseOverNode: null,
+            preHoverState: "",
+            brushSize: 1,
             stop: 0
         };
     }
@@ -67,6 +70,12 @@ export default class PathFindingVisualizer extends Component {
 
 
     addNode(row, col) {
+
+        if (!this.state.mouseDown) {
+            this.setState({ preHoverState: this.state.grid[col][row].state });
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "nodeHover" } } } }) });
+        }
+
         if (this.state.currentSelection === "1") {
             if (this.state.grid[col][row].state == "wall") {
                 this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "none" } } } }) });
@@ -87,11 +96,23 @@ export default class PathFindingVisualizer extends Component {
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "end" } } } }) });
             this.state.endNode = { col: col, row: row };
         }
+
     }
 
 
     handleMouseDown(row, col) {
-        if (this.state.mouseDown == false) return;
+
+        let nodes = this.getBrushNodesByCenter(row, col, 3);
+
+        nodes.forEach(element => {
+
+        })
+
+        if (this.state.mouseDown == false) {
+            this.setState({ preHoverState: this.state.grid[col][row].state });
+            this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "nodeHover" } } } }) });
+            return;
+        }
 
         if (this.state.currentSelection === "1") {
             if (this.state.grid[col][row].state == "wall") {
@@ -103,7 +124,6 @@ export default class PathFindingVisualizer extends Component {
         else if (this.state.currentSelection === "2") { // add weight
             this.state.grid[col][row].weight += 1;
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "weighted" + String(Math.min(this.state.grid[col][row].weight, 5)) } } } }) });
-            console.log(this.state.grid[col][row].state);
         }
         else if (this.state.currentSelection === "3") {
             this.state.grid[this.state.startNode.col][this.state.startNode.row].state = "none";
@@ -114,10 +134,43 @@ export default class PathFindingVisualizer extends Component {
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "end" } } } }) });
             this.state.endNode = { col: col, row: row };
         }
+
+
+    }
+
+    //de-hover tiles not hovered over
+    dehover(row, col) {
+        if (!this.state.mouseDown) {
+            if (this.state.preHoverState != "nodeHover") {
+                this.state.grid[col][row].state = this.state.preHoverState;
+            }
+            else {
+                //idk
+            }
+
+        }
     }
 
     handleMouseUp() {
         //this.setState({ mouseDown: false });
+    }
+
+    getBrushNodesByCenter(row, col, size) {
+        let nodes = [];
+        nodes.push(this.state.grid[col][row]);
+        for (let i = 0; i < size - 1; i++) {
+            nodes.forEach(element => {
+                let adj = this.getAdjacent(element.row, element.col);
+                adj.forEach(newElement => {
+                    if (!nodes.includes(newElement)) {
+                        nodes.push(newElement);
+                    }
+                });
+
+            });
+        }
+
+        return nodes;
     }
 
     resetGrid() {
@@ -217,6 +270,21 @@ export default class PathFindingVisualizer extends Component {
         }
     }
 
+    getAdjacent(row, col) {
+        let adjConsts = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+        let adj = [];
+
+
+        for (let i = 0; i < 4; i++) {
+            try {
+                if (this.state.grid[col + adjConsts[i][0]][row + adjConsts[i][1]] != null) {
+                    adj.push(this.state.grid[col + adjConsts[i][0]][row + adjConsts[i][1]]);
+                }
+            } catch (error) { }
+        }
+        return adj;
+    }
+
     render() {
         this.mouseDown = false;
         if (this.state.isLoading) {
@@ -234,6 +302,12 @@ export default class PathFindingVisualizer extends Component {
                         <option value="2">Weights</option>
                         <option value="3">Start Node</option>
                         <option value="4">End Node</option>
+                    </select>
+                    <select id="Brush Size" onChange={(option) => this.setState({ currentSelection: option.target.value })}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                     <label id="Algo"> Select Algorithm </label>
                     <select id="Algo" onChange={(option) => this.setState({ algoSelection: option.target.value })}>
@@ -254,6 +328,7 @@ export default class PathFindingVisualizer extends Component {
                                             addNode={() => this.addNode(node.row, node.col)}
                                             handleMouseDown={() => this.addNode(node.row, node.col)}
                                             handleMouseOver={() => this.handleMouseDown(node.row, node.col)}
+                                            dehover={() => this.dehover(node.row, node.col)}
                                             //handleMouseUp={() => console.log("hihi")}
                                             state={node.state}
                                             isRendered={false}

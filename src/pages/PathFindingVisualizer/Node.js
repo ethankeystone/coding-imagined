@@ -37,6 +37,7 @@ export default class Node extends Component {
             handleMouseUp,
             handleMouseDown,
             handleMouseOver,
+            dehover,
             weight,
             opacity
         } = this.props;
@@ -45,16 +46,17 @@ export default class Node extends Component {
             return (
                 <div className={"node "}>
                     Yikes
-                    </div>
+                </div>
             );
         } else {
             return (
                 <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
                     onMouseEnter={() => handleMouseOver(col, row)}
+                    onMouseLeave={() => { dehover(col, row) }}
                     onMouseDown={() => { handleMouseDown(col, row) }}
-                    //onMouseEnter={() => addNode(col, row)}
+                //onMouseEnter={() => addNode(col, row)}
                 //onMouseUp={() => handleMouseUp()}
-                > 
+                >
                 </div>
             );
         }
