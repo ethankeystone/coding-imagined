@@ -71,6 +71,14 @@ export default class PathFindingVisualizer extends Component {
 
     addNode(row, col) {
 
+        let nodes = this.getBrushNodesByCenter(row, col, 3);
+
+        nodes.forEach(element => {
+            let stateChange = (col2, row2) => this.setState({ grid: update(this.state.grid, { [col2]: { [row2]: { state: { $set: "nodeHover" } } } }) }, () => console.log(this.state.grid[element.col][element.row].state));
+            stateChange(element.col, element.row);
+        });
+        return;
+
         if (!this.state.mouseDown) {
             this.setState({ preHoverState: this.state.grid[col][row].state });
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "nodeHover" } } } }) });
@@ -104,9 +112,12 @@ export default class PathFindingVisualizer extends Component {
 
         let nodes = this.getBrushNodesByCenter(row, col, 3);
 
-        nodes.forEach(element => {
+        let stateChange = (col2, row2) => this.setState({ grid: update(this.state.grid, { [col2]: { [row2]: { state: { $set: "nodeHover" } } } }) }, () => console.log(this.state.grid[col2][row2].state));
 
-        })
+        nodes.forEach(element => {
+            stateChange(element.col, element.row);
+        });
+        return;
 
         if (this.state.mouseDown == false) {
             this.setState({ preHoverState: this.state.grid[col][row].state });
@@ -142,7 +153,7 @@ export default class PathFindingVisualizer extends Component {
     dehover(row, col) {
         if (!this.state.mouseDown) {
             if (this.state.preHoverState != "nodeHover") {
-                this.state.grid[col][row].state = this.state.preHoverState;
+                //this.state.grid[col][row].state = this.state.preHoverState;
             }
             else {
                 //idk
