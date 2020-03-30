@@ -25,7 +25,8 @@ export default class PathFindingVisualizer extends Component {
             mouseOverNode: null,
             preHoverState: "",
             brushSize: 1,
-            stop: 0
+            stop: 0,
+            weight: false
         };
     }
 
@@ -101,12 +102,6 @@ export default class PathFindingVisualizer extends Component {
 
 
     handleMouseDown(row, col) {
-
-        let nodes = this.getBrushNodesByCenter(row, col, 3);
-
-        nodes.forEach(element => {
-
-        })
 
         if (this.state.mouseDown == false) {
             this.setState({ preHoverState: this.state.grid[col][row].state });
@@ -224,6 +219,11 @@ export default class PathFindingVisualizer extends Component {
         });
     }
 
+    //toggles the weight numbers
+    toggleWeightNumber() {
+
+    }
+
     findPath() {
         if (this.state.grid != null && !this.state.isRunningAnimation) {
             let algo = null;
@@ -296,6 +296,7 @@ export default class PathFindingVisualizer extends Component {
                     <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
                     <button onClick={() => this.resetGrid()}> Reset Grid </button>
                     <button onClick={() => this.findPath()}> Find Path </button>
+                    <button onClick={() => this.toggleWeightNumber()}> Toggle Weight Numbers </button>
                     <label htmlFor="Weight">Toggle Placement</label>
                     <select id="Weight" onChange={(option) => this.setState({ currentSelection: option.target.value })}>
                         <option value="1">Wall</option>
@@ -303,7 +304,7 @@ export default class PathFindingVisualizer extends Component {
                         <option value="3">Start Node</option>
                         <option value="4">End Node</option>
                     </select>
-                    <select id="Brush Size" onChange={(option) => this.setState({ currentSelection: option.target.value })}>
+                    <select id="Brush Size" /*onChange={(option) => this.setState({  })}*/>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
