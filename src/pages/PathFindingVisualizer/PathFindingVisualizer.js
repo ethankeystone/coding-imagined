@@ -11,7 +11,6 @@ import { any } from "prop-types";
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isLoading: true,
             grid: null,
@@ -219,9 +218,10 @@ export default class PathFindingVisualizer extends Component {
         });
     }
 
-    //toggles the weight numbers
+    //toggles the weight numbers in each div
     toggleWeightNumber() {
-
+      this.setState({weight: !this.state.weight});
+      console.log(this.state.weight)
     }
 
     findPath() {
@@ -304,7 +304,7 @@ export default class PathFindingVisualizer extends Component {
                         <option value="3">Start Node</option>
                         <option value="4">End Node</option>
                     </select>
-                    <select id="Brush Size" /*onChange={(option) => this.setState({  })}*/>
+                    <select id="Brush Size" onChange={(option) => this.setState({brushSize: option.target.value})}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -334,6 +334,7 @@ export default class PathFindingVisualizer extends Component {
                                             state={node.state}
                                             isRendered={false}
                                             weight={node.weight}
+                                            displayWeight={this.state.weight}
                                         ></Node>;
                                     })}
                                 </div>

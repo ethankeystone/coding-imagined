@@ -8,6 +8,7 @@
     animation-name: nodeCreation;
     animation-duration: .7s;
     color: black;
+    position: inherit;
 }
 
 .nodeHover{

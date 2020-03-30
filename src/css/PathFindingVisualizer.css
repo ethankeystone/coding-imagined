@@ -1,3 +1,8 @@
+::selection {
+    color: none;
+    background: none;
+}
+
 .center {
     text-align: center;
     margin-top: 20px;
@@ -16,7 +21,7 @@
     margin-left: 10px;
     margin-right: 10px;
     padding: 0;
-    font-size: 0;
+    font-size: 4;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

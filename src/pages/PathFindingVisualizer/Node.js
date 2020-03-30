@@ -39,7 +39,8 @@ export default class Node extends Component {
             handleMouseOver,
             dehover,
             weight,
-            opacity
+            opacity,
+            displayWeight
         } = this.props;
 
         if (this.state.isLoading === true) {
@@ -49,16 +50,30 @@ export default class Node extends Component {
                 </div>
             );
         } else {
-            return (
-                <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
-                    onMouseEnter={() => handleMouseOver(col, row)}
-                    onMouseLeave={() => { dehover(col, row) }}
-                    onMouseDown={() => { handleMouseDown(col, row) }}
-                //onMouseEnter={() => addNode(col, row)}
-                //onMouseUp={() => handleMouseUp()}
-                >
-                </div>
-            );
+            if (displayWeight) {
+                return (
+                    <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                        onMouseEnter={() => handleMouseOver(col, row)}
+                        onMouseLeave={() => { dehover(col, row) }}
+                        onMouseDown={() => { handleMouseDown(col, row) }}
+                    //onMouseEnter={() => addNode(col, row)}
+                    //onMouseUp={() => handleMouseUp()}
+                    >
+                        {weight}
+                    </div>
+                );
+            } else {
+                return (
+                    <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                        onMouseEnter={() => handleMouseOver(col, row)}
+                        onMouseLeave={() => { dehover(col, row) }}
+                        onMouseDown={() => { handleMouseDown(col, row) }}
+                    //onMouseEnter={() => addNode(col, row)}
+                    //onMouseUp={() => handleMouseUp()}
+                    >
+                    </div>
+                );
+            }
         }
     }
 }
