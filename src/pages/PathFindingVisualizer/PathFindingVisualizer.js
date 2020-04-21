@@ -36,11 +36,12 @@ export default class PathFindingVisualizer extends Component {
         let height = 40;
         var grid = [];
         var id = 0;
-        new GenerateRandomMaze(width, height);
+    
         for (let i = 0; i < width; i++) {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
                 let nodeState = "none"
+        
                 if (i === this.state.startNode.col && j === this.state.startNode.row) {
                     nodeState = "start";
                 } else if (i === this.state.endNode.col && j === this.state.endNode.row) {
@@ -69,7 +70,7 @@ export default class PathFindingVisualizer extends Component {
     }
 
 
-
+   
     addNode(row, col) {
 
         if (!this.state.mouseDown) {
@@ -178,36 +179,40 @@ export default class PathFindingVisualizer extends Component {
     }
 
     generateRandomGrid() {
+        this.resetGrid();
         let width = 15;
         let height = 40;
         var grid = [];
         var id = 0;
 
-        let startNode = this.state.startNode;
-        let endNode = this.state.endNode;
+        let randomMaze = new GenerateRandomMaze(width, height);
+        var randomGrid = randomMaze.maze(width, height);
 
         for (let i = 0; i < width; i++) {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
-                let randomNumber = Math.random() * 100;
+                let renderTime = j + i;
                 let nodeState = "none";
-                if (randomNumber < 30) {
+                if (randomGrid[i][j].type == "wall") {
                     nodeState = "wall";
-                }
-
-                if (i === startNode.col && j === startNode.row) {
+                } else if (randomGrid[i][j].type == "start") {
                     nodeState = "start";
-                } else if (i === endNode.col && j === endNode.row) {
+                    this.state.startNode.col = i;
+                    this.state.startNode.row = j;
+                } else if (randomGrid[i][j].type == "end") {
                     nodeState = "end";
+                    this.state.endNode.col = i;
+                    this.state.endNode.row = j;
                 }
                 currentRow.push({
                     col: i,
                     row: j,
-                    id: id,
                     state: nodeState,
-                    weightvalue: 0,
+                    id: id,
                     isRendered: false,
-                    weight: -1
+                    renderTime: renderTime,
+                    weight: 1,
+                    opacity: 0
                 });
                 id++;
             }
