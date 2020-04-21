@@ -7,6 +7,7 @@ import Dijkstra from "./Algorithms/Dijkstra"
 import BreadthFirst from "./Algorithms/BreadthFirst"
 import { scryRenderedDOMComponentsWithTag } from "react-dom/test-utils";
 import { any } from "prop-types";
+import GenerateRandomMaze from "./GenerateRandomMaze";
 
 export default class PathFindingVisualizer extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export default class PathFindingVisualizer extends Component {
         let height = 40;
         var grid = [];
         var id = 0;
-
+        new GenerateRandomMaze(width, height);
         for (let i = 0; i < width; i++) {
             const currentRow = [];
             for (let j = 0; j < height; j++) {
