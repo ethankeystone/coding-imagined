@@ -27,7 +27,12 @@ export default class Node extends Component {
             this.props.renderTime * 5
         );
     }
-
+    rgb(r, g, b){
+        r = Math.floor(r);
+        g = Math.floor(g);
+        b = Math.floor(b);
+        return ["rgb(",r,",",g,",",b,")"].join("");
+    }
     render() {
         const {
             col,
@@ -40,39 +45,70 @@ export default class Node extends Component {
             dehover,
             weight,
             opacity,
-            displayWeight
+            displayWeight,
         } = this.props;
 
         if (this.state.isLoading === true) {
             return (
                 <div className={"node "}>
-                    Yikes
+                    Something really bad happened
                 </div>
             );
         } else {
-            if (displayWeight) {
-                return (
-                    <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
-                        onMouseEnter={() => handleMouseOver(col, row)}
-                        onMouseLeave={() => { dehover(col, row) }}
-                        onMouseDown={() => { handleMouseDown(col, row) }}
-                    //onMouseEnter={() => addNode(col, row)}
-                    //onMouseUp={() => handleMouseUp()}
-                    >
-                        {weight}
-                    </div>
-                );
+            if (state.substring(0,8) == "weighted") {
+                let weightAmount = parseInt(state.substring(8));
+                
+                if (displayWeight) {
+                    return (
+                        <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                            style={{backgroundColor: this.rgb(258 - weight * 20, 60, 68)}}
+                            onMouseEnter={() => handleMouseOver(col, row)}
+                            onMouseLeave={() => { dehover(col, row) }}
+                            onMouseDown={() => { handleMouseDown(col, row) }}
+                        //onMouseEnter={() => addNode(col, row)}
+                        //onMouseUp={() => handleMouseUp()}
+                        >
+                            {weight}
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                        style={{backgroundColor: this.rgb(258 - weight * 20, 60, 68)}}
+                            onMouseEnter={() => handleMouseOver(col, row)}
+                            onMouseLeave={() => { dehover(col, row) }}
+                            onMouseDown={() => { handleMouseDown(col, row) }}
+                        //onMouseEnter={() => addNode(col, row)}
+                        //onMouseUp={() => handleMouseUp()}
+                        >
+                        </div>
+                    );
+                }
             } else {
-                return (
-                    <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
-                        onMouseEnter={() => handleMouseOver(col, row)}
-                        onMouseLeave={() => { dehover(col, row) }}
-                        onMouseDown={() => { handleMouseDown(col, row) }}
-                    //onMouseEnter={() => addNode(col, row)}
-                    //onMouseUp={() => handleMouseUp()}
-                    >
-                    </div>
-                );
+                if (displayWeight) {
+                    return (
+                        <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                            onMouseEnter={() => handleMouseOver(col, row)}
+                            onMouseLeave={() => { dehover(col, row) }}
+                            onMouseDown={() => { handleMouseDown(col, row) }}
+                        //onMouseEnter={() => addNode(col, row)}
+                        //onMouseUp={() => handleMouseUp()}
+                        >
+                            {weight}
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div className={(this.state.isRendered === true ? "nodeRendered " + state : "nodeNotRendered")}
+                            onMouseEnter={() => handleMouseOver(col, row)}
+                            onMouseLeave={() => { dehover(col, row) }}
+                            onMouseDown={() => { handleMouseDown(col, row) }}
+                        //onMouseEnter={() => addNode(col, row)}
+                        //onMouseUp={() => handleMouseUp()}
+                        >
+                        </div>
+                    );
+                }
             }
         }
     }

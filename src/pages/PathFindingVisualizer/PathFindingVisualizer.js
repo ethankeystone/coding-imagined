@@ -178,6 +178,55 @@ export default class PathFindingVisualizer extends Component {
         });
     }
 
+    generateWeightedRandomGrid() {
+        this.resetGrid();
+        let width = 15;
+        let height = 40;
+        var grid = [];
+        var id = 0;
+
+        let randomMaze = new GenerateRandomMaze(width, height);
+        var randomGrid = randomMaze.generateWeightedMaze(width, height);
+
+        for (let i = 0; i < width; i++) {
+            const currentRow = [];
+            for (let j = 0; j < height; j++) {
+                let renderTime = j + i;
+                let nodeState = "none";
+                let weight = 0;
+                if (randomGrid[i][j].type == "wall") {
+                    nodeState = "wall";
+                } else if (randomGrid[i][j].type == "start") {
+                    nodeState = "start";
+                    this.state.startNode.col = i;
+                    this.state.startNode.row = j;
+                } else if (randomGrid[i][j].type == "end") {
+                    nodeState = "end";
+                    this.state.endNode.col = i;
+                    this.state.endNode.row = j;
+                } else if (randomGrid[i][j].type.substring(0,6) == "weight") {
+                    nodeState = randomGrid[i][j].type;
+                    weight = parseInt(randomGrid[i][j].type.substring(8));
+                }
+                currentRow.push({
+                    col: i,
+                    row: j,
+                    state: nodeState,
+                    id: id,
+                    isRendered: false,
+                    renderTime: renderTime,
+                    weight: weight,
+                    opacity: 0
+                });
+                id++;
+            }
+            grid.push(currentRow);
+        }
+        this.setState({
+            isLoading: false,
+            grid: grid
+        });
+    }
     generateRandomGrid() {
         this.resetGrid();
         let width = 15;
@@ -193,6 +242,7 @@ export default class PathFindingVisualizer extends Component {
             for (let j = 0; j < height; j++) {
                 let renderTime = j + i;
                 let nodeState = "none";
+                let weight = 0;
                 if (randomGrid[i][j].type == "wall") {
                     nodeState = "wall";
                 } else if (randomGrid[i][j].type == "start") {
@@ -203,7 +253,7 @@ export default class PathFindingVisualizer extends Component {
                     nodeState = "end";
                     this.state.endNode.col = i;
                     this.state.endNode.row = j;
-                }
+                } 
                 currentRow.push({
                     col: i,
                     row: j,
@@ -299,6 +349,7 @@ export default class PathFindingVisualizer extends Component {
             let grid = this.state.grid;
             return (
                 <div className="center">
+                    <button onClick={() => this.generateWeightedRandomGrid()}> Generate Weighted Maze </button>
                     <button onClick={() => this.generateRandomGrid()}> Generate Maze </button>
                     <button onClick={() => this.resetGrid()}> Reset Grid </button>
                     <button onClick={() => this.findPath()}> Find Path </button>
