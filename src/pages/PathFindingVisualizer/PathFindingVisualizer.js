@@ -10,6 +10,24 @@ import { any } from "prop-types";
 import GenerateRandomMaze from "./GenerateRandomMaze";
 
 export default class PathFindingVisualizer extends Component {
+    /**
+     * 
+     * @param {*} props
+     * @param {Object} this.state 
+     * @param {Boolean} this.state.isLoading represents whether the grid is loading or not (only triggers at start of rendering)
+     * @param {Object[][]} this.state.grid 2d grid of objects representing each node
+     * @param {boolean} this.state.mouseDown whether the mouse is currently pressed
+     * @param {String} currentSelection current selection of node to be placed
+     * @param {boolean} stopAnimation
+     * @param {boolean} isRunningAnimation whether an animation is running currently
+     * @param {String} algoSelection current selecction of which algo is selected currently
+     * @param {Object} startNode coordinates of the default start node
+     * @param {Object} endNode coordinates of the default end node
+     * @param {Object} mouseOVerNode current node being hovered over
+     * @param {Number} brushSize size of the current brush
+     * @param {Number} stop
+     * @param {boolean} weight 
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +48,10 @@ export default class PathFindingVisualizer extends Component {
         };
     }
 
-
+    /**
+     * Creates the default starting grid with dimmensions based on intial seettings of width and height
+     * @returns {Object[][]} returns a grid of nodes 
+     */
     createGrid() {
         let width = 15;
         let height = 40;
@@ -70,9 +91,12 @@ export default class PathFindingVisualizer extends Component {
     }
 
 
-   
+   /**
+    * Changes the state of the node based on the value of this.state.currentSelection.  
+    * @param {Number} row x cordinates of the node 
+    * @param {Number} col y coordiinates of the node
+    */
     addNode(row, col) {
-
         if (!this.state.mouseDown) {
             this.setState({ preHoverState: this.state.grid[col][row].state });
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "nodeHover" } } } }) });
@@ -101,9 +125,8 @@ export default class PathFindingVisualizer extends Component {
 
     }
 
-
+    //pretty much the same thing as the addNode method
     handleMouseDown(row, col) {
-
         if (this.state.mouseDown == false) {
             this.setState({ preHoverState: this.state.grid[col][row].state });
             this.setState({ grid: update(this.state.grid, { [col]: { [row]: { state: { $set: "nodeHover" } } } }) });
@@ -168,7 +191,8 @@ export default class PathFindingVisualizer extends Component {
 
         return nodes;
     }
-
+    
+    //resets the grid to the starting values
     resetGrid() {
         clearInterval(this.state.stop);
         this.state.stopAnimation = true;
@@ -185,7 +209,7 @@ export default class PathFindingVisualizer extends Component {
         var grid = [];
         var id = 0;
 
-        let randomMaze = new GenerateRandomMaze(width, height);
+        let randomMaze = new GenerateRandomMaze();
         var randomGrid = randomMaze.generateWeightedMaze(width, height);
 
         for (let i = 0; i < width; i++) {
@@ -227,6 +251,7 @@ export default class PathFindingVisualizer extends Component {
             grid: grid
         });
     }
+
     generateRandomGrid() {
         this.resetGrid();
         let width = 15;
@@ -234,7 +259,7 @@ export default class PathFindingVisualizer extends Component {
         var grid = [];
         var id = 0;
 
-        let randomMaze = new GenerateRandomMaze(width, height);
+        let randomMaze = new GenerateRandomMaze();
         var randomGrid = randomMaze.maze(width, height);
 
         for (let i = 0; i < width; i++) {
@@ -280,10 +305,12 @@ export default class PathFindingVisualizer extends Component {
       console.log(this.state.weight)
     }
 
+    //finds the path between the start and end node
     findPath() {
         if (this.state.grid != null && !this.state.isRunningAnimation) {
             let algo = null;
             let timeInterval = 0;
+            //time interval represents the amount of time it takes between each animation
             if (this.state.algoSelection === "1") {
                 algo = new AStar(this.state.grid, this.state.grid[this.state.startNode.col][this.state.startNode.row], this.state.grid[this.state.endNode.col][this.state.endNode.row]);
                 timeInterval = 200;
